@@ -1,0 +1,87 @@
+apply plugin: 'java'
+apply plugin: "idea"
+apply plugin: "eclipse"
+apply plugin: 'maven-publish'
+
+group = "com.demo2do"
+version = '1.0.0-RELEASE'
+
+defaultTasks 'clean', 'jar'
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+compileJava {
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+    options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier 'sources'
+            }
+
+            pom.withXml {
+                asNode().appendNode('description', 'Basic APP Framework')
+            }
+        }
+    }
+    repositories {
+        maven {
+            url 'http://192.168.9.172:8081/nexus/content/repositories/releases'
+            credentials {
+                username 'admin'
+                password 'try1now'
+            }
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url 'http://192.168.9.172:8081/nexus/content/groups/public/'
+    }
+}
+
+dependencies {
+
+    // dependency with compile scope
+    compile(
+            // spring core dependency
+            'org.springframework:spring-core:3.0.5.RELEASE',
+            'org.springframework:spring-beans:3.0.5.RELEASE',
+            'org.springframework:spring-expression:3.0.5.RELEASE',
+            'org.springframework:spring-context:3.0.5.RELEASE',
+            // spring aop dependency
+            'aopalliance:aopalliance:1.0',
+            'org.springframework:spring-aop:3.0.5.RELEASE',
+            'org.springframework:spring-context-support:3.0.5.RELEASE',
+            // spring data access dependency
+            'org.springframework:spring-jdbc:3.0.5.RELEASE',
+            'org.springframework:spring-tx:3.0.5.RELEASE',
+            // commons dependency
+            'commons-lang:commons-lang:2.5',
+            'commons-codec:commons-codec:1.5',
+            'commons-logging:commons-logging:1.1.1',
+            // netty
+            'io.netty:netty:3.6.3.Final',
+            // logging dependency
+            'org.slf4j:slf4j-api:1.7.5',
+            // google protobuf
+            'com.google.protobuf:protobuf-java:2.4.1'
+    )
+
+    // ependency with test scope
+    testCompile(
+            'org.springframework:spring-test:3.0.5.RELEASE',
+            'junit:junit:4.11'
+    )
+}
