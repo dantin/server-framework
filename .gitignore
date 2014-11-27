@@ -10,3 +10,25 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Idea related stuff
+/.idea/workspace.xml
+/.idea/libraries
+*.iml
+*.ipr
+*.iws
+
+# Eclipse stuff
+.project
+.classpath
+
+# Gradle stuff
+/.gradle/
+!/gradle/wrapper/gradle-wrapper.jar
+!/gradle/wrapper/gradle-wrapper.properties
+
+# Ignore logs
+/logs/
+
+# Ignore output
+/out/
