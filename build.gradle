@@ -73,14 +73,15 @@ dependencies {
             // netty
             'io.netty:netty:3.6.3.Final',
             // logging dependency
-            // log interface
-            'commons-logging:commons-logging:1.1.1',
-            'org.slf4j:slf4j-api:1.7.5',
-            // log implementations
-            'log4j:log4j:1.2.16',
-            'ch.qos.logback:logback-access:1.0.13',
+            // interface
+            'org.slf4j:slf4j-api:1.7.7',
+            // implementations
+            //'ch.qos.logback:logback-access:1.0.13',
             'ch.qos.logback:logback-classic:1.0.13',
             'ch.qos.logback:logback-core:1.0.13',
+            // adapters
+            'org.slf4j:log4j-over-slf4j:1.7.7',
+            'org.slf4j:jcl-over-slf4j:1.7.7',
             // google protobuf
             'com.google.protobuf:protobuf-java:2.4.1'
     )
