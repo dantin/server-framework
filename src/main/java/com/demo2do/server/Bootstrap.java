@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * @author David
  */
-public class Bootstrap {
+public final class Bootstrap {
 
     private static final Logger logger = LoggerFactory.getLogger(Bootstrap.class);
 
@@ -36,7 +36,7 @@ public class Bootstrap {
         long birth = System.currentTimeMillis();
 
         try {
-            logger.warn(Constants.SERVER_NAME + " init...");
+            logger.warn("Server Framework init...");
             logger.warn("Version: " + VERSION);
 
             // 加载Spring容器
@@ -70,7 +70,7 @@ public class Bootstrap {
 
             // 启动Spring容器
             context.start();
-            logger.warn(Constants.SERVER_NAME + " started! takes " + (System.currentTimeMillis() - birth) + " ms");
+            logger.warn("Server Framework started! takes " + (System.currentTimeMillis() - birth) + " ms");
         } catch (RuntimeException e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);
