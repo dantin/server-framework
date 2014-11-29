@@ -15,10 +15,15 @@ public class CommonUtilTest {
         list.add("two");
         list.add("two");
         list.add("three");
-        Assert.assertEquals("deduplicate 'two'", list.size() - 1, CommonUtil.deduplicate(list).size());
-        for (String element : CommonUtil.deduplicate(list)) {
-            System.out.println(element);
-        }
+
+        List<String> result = CommonUtil.deduplicate(list);
+
+        Assert.assertEquals(list.size() - 1, result.size());
+
+        System.out.println();
+        System.out.println("Test Deduplicate");
+        System.out.println("original list:     " + list);
+        System.out.println("after deduplicate: " + result);
     }
 
     @Test
@@ -33,9 +38,17 @@ public class CommonUtilTest {
         list2.add(3);
         list2.add(4);
         list2.add(5);
-        Assert.assertEquals(list1.size() + list2.size() - 3, CommonUtil.deduplicatedMerge(list1, list2).size());
-        for (Integer element : CommonUtil.deduplicatedMerge(list1, list2)) {
-            System.out.println(element);
-        }
+
+        List<Integer> result = CommonUtil.deduplicatedMerge(list1, list2);
+
+        Assert.assertEquals(list1.size() + list2.size() - 3, result.size());
+
+        System.out.println();
+        System.out.println("Test Deduplicated Merge");
+        System.out.println("original");
+        System.out.println("list1:  " + list1);
+        System.out.println("list2:  " + list2);
+        System.out.println("after deduplicated merge");
+        System.out.println("result: " + result);
     }
 }
