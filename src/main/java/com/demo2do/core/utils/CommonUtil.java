@@ -15,8 +15,8 @@ public abstract class CommonUtil {
     /**
      * 去重列表
      *
-     * @param list  原始列表
-     * @return      去重后的列表
+     * @param list 原始列表
+     * @return 去重后的列表
      */
     public static <T> List<T> deduplicate(final List<T> list) {
         if (list == null || list.size() == 0) {
@@ -36,9 +36,9 @@ public abstract class CommonUtil {
     /**
      * 合并并去重两个列表
      *
-     * @param one      列表一
-     * @param another  列表二
-     * @return         去重后的列表
+     * @param one     列表一
+     * @param another 列表二
+     * @return 去重后的列表
      */
     public static <T> List<T> deduplicatedMerge(final List<T> one, final List<T> another) {
         if (one == null && another == null) {
