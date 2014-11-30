@@ -7,6 +7,8 @@ import java.util.Set;
 
 /**
  * 常用工具类
+ *
+ * @author David
  */
 public abstract class CommonUtil {
 
