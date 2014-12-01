@@ -10,7 +10,12 @@ import java.util.List;
 public class ClassUtilTest extends TestCase{
 
     public void testGetAllSubClass() {
-        List<Class<?>> classes = ClassUtil.getAllSubClass("com.demo2do", Mediator.class);
+        List<Class<?>> classes = null;
+        try {
+            classes = ClassUtil.getAllSubClass("com.demo2do", Mediator.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Assert.assertNotNull(classes);
         Assert.assertEquals(0, classes.size());
     }

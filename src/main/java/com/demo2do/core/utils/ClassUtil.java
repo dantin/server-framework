@@ -22,28 +22,23 @@ import java.util.jar.JarFile;
  */
 public abstract class ClassUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClassUtil.class);
-
     /**
      * 获取某一包内指定目标类的所有子类，包括其实现类
      *
      * @param basePackage 包名
      * @param target      目标类（父类或接口）
      * @return target的所有子类，包括其实现类
+     * @throws java.io.IOException
      */
-    public static List<Class<?>> getAllSubClass(final String basePackage, final Class<?> target) {
+    public static List<Class<?>> getAllSubClass(final String basePackage, final Class<?> target) throws IOException {
         List<Class<?>> classes = new ArrayList<Class<?>>();
 
-        try {
-            // 获得包内的所有类名
-            for (Class<?> clazz : getAllClass(basePackage, true)) {
-                // 如果clazz是target的子类
-                if (target.isAssignableFrom(clazz) && !target.equals(clazz)) {
-                    classes.add(clazz);
-                }
+        // 获得包内的所有类名
+        for (Class<?> clazz : getAllClass(basePackage, true)) {
+            // 如果clazz是target的子类
+            if (target.isAssignableFrom(clazz) && !target.equals(clazz)) {
+                classes.add(clazz);
             }
-        } catch (IOException e) {
-            logger.error("getAllClass exception, ", e);
         }
 
         return classes;
@@ -131,7 +126,7 @@ public abstract class ClassUtil {
                 try {
                     clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
                 } catch (ClassNotFoundException e) {
-                    logger.error("{} class NOT found: {}", className, e);
+                    e.printStackTrace();
                 }
 
                 if (clazz != null) {
@@ -177,7 +172,7 @@ public abstract class ClassUtil {
                     try {
                         clazz = Thread.currentThread().getContextClassLoader().loadClass(clazzName);
                     } catch (ClassNotFoundException e) {
-                        logger.error("{} class NOT found: {}", clazzName, e);
+                        e.printStackTrace();
                     }
 
                     if (clazz != null) {
@@ -186,7 +181,7 @@ public abstract class ClassUtil {
                 }
             }
         } catch (IOException e) {
-            logger.error("IOException when open JAR file: {}", e);
+            e.printStackTrace();
         }
     }
 
