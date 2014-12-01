@@ -56,7 +56,7 @@ public abstract class ClassUtil {
      * @return 包内的所有类
      * @throws java.io.IOException
      */
-    public static List<Class<?>> getAllClass(String basePackage) throws IOException {
+    public static List<Class<?>> getAllClass(final String basePackage) throws IOException {
         return getAllClass(basePackage, true);
     }
 
@@ -68,7 +68,7 @@ public abstract class ClassUtil {
      * @return 包内所有类
      * @throws java.io.IOException
      */
-    public static List<Class<?>> getAllClass(String basePackage, boolean recursive) throws IOException {
+    public static List<Class<?>> getAllClass(final String basePackage, final boolean recursive) throws IOException {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String packagePath = basePackage.replace(".", "/");
         Enumeration<URL> resources = loader.getResources(packagePath);
@@ -218,7 +218,7 @@ public abstract class ClassUtil {
      * @param fileName 文件名
      * @return 若是则返回true；反之返回false
      */
-    private static boolean filterClassName(String fileName) {
+    private static boolean filterClassName(final String fileName) {
         return fileName.endsWith(".class");
     }
 }

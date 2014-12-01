@@ -1,72 +1,67 @@
 package com.demo2do.core.utils;
 
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class CommonUtilTest {
+public class CommonUtilTest extends TestCase {
 
-    @Test
-    public void testDeduplicateStringList() {
-        List<String> list = new ArrayList<String>();
-        list.add("one");
-        list.add("two");
-        list.add("two");
-        list.add("three");
+    private List<String> strings;
 
-        List<String> result = CommonUtil.deduplicate(list);
+    private List<Class<?>> classes;
 
-        Assert.assertEquals(list.size() - 1, result.size());
+    private List<Integer> iList1;
+
+    private List<Integer> iList2;
+
+    @Override
+    public void setUp() {
+        this.strings = Arrays.asList("one", "two", "two", "three");
+        this.classes = Arrays.asList(new Class<?>[]{Integer.class, Long.class, Long.class, Double.class});
+        this.iList1 = Arrays.asList(1, 2, 3, 3);
+        this.iList2 = Arrays.asList(3, 3, 4, 5);
+    }
+
+    @Override
+    public void tearDown() {
+        // do nothings here
+    }
+
+    public void testDeduplicate() {
+        List<String> deduplicatedStrings = CommonUtil.deduplicate(strings);
+
+        Assert.assertEquals(strings.size() - 1, deduplicatedStrings.size());
 
         System.out.println();
         System.out.println("Test Deduplicate String list");
-        System.out.println("original list:     " + list);
-        System.out.println("after deduplicate: " + result);
-    }
+        System.out.println("original list:     " + strings);
+        System.out.println("after deduplicate: " + deduplicatedStrings);
 
-    @Test
-    public void testDeduplicateClassList() {
-        List<Class<?>> list = new ArrayList<Class<?>>();
-        list.add(Integer.class);
-        list.add(Long.class);
-        list.add(Long.class);
-        list.add(Double.class);
+        List<Class<?>> deduplicatedClasses = CommonUtil.deduplicate(classes);
 
-        List<Class<?>> result = CommonUtil.deduplicate(list);
-
-        Assert.assertEquals(list.size() - 1, result.size());
+        Assert.assertEquals(classes.size() - 1, deduplicatedClasses.size());
 
         System.out.println();
         System.out.println("Test Deduplicate Class list");
-        System.out.println("original list:     " + list);
-        System.out.println("after deduplicate: " + result);
+        System.out.println("original list:     " + classes);
+        System.out.println("after deduplicate: " + deduplicatedClasses);
     }
 
-    @Test
-    public void testDeduplicatedMergeIntList() {
-        List<Integer> list1 = new ArrayList<Integer>();
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);
-        list1.add(3);
-        List<Integer> list2 = new ArrayList<Integer>();
-        list2.add(3);
-        list2.add(3);
-        list2.add(4);
-        list2.add(5);
+    public void testDeduplicatedMerge() {
+        List<Integer> mergedIntegerList = CommonUtil.deduplicatedMerge(iList1, iList2);
 
-        List<Integer> result = CommonUtil.deduplicatedMerge(list1, list2);
-
-        Assert.assertEquals(list1.size() + list2.size() - 3, result.size());
+        Assert.assertEquals(iList1.size() + iList2.size() - 3, mergedIntegerList.size());
 
         System.out.println();
         System.out.println("Test Deduplicated Merge int list");
         System.out.println("original");
-        System.out.println("list1:  " + list1);
-        System.out.println("list2:  " + list2);
+        System.out.println("list1:  " + iList1);
+        System.out.println("list2:  " + iList2);
         System.out.println("after deduplicated merge int list");
-        System.out.println("result: " + result);
+        System.out.println("result: " + mergedIntegerList);
     }
 }
