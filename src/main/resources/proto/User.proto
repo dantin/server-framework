@@ -1,0 +1,26 @@
+
+// 用户模块
+package app.user;
+
+import "Common.proto";
+
+option java_package = "com.demo2do.entity.protocol.proto.user";
+option java_outer_classname = "UserServicePb";
+
+message UserService {
+
+    // Login
+    optional LoginRequest loginRequest = 1;
+    optional LoginResponse loginResponse = 2;
+}
+
+message LoginRequest {
+    optional string account = 1;
+    optional string password = 2;
+}
+
+message LoginResponse {
+    // If login failed, userId will be empty / invalid.
+    optional app.common.IdAndName user = 1;
+    optional string token = 2;
+}

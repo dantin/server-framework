@@ -1,0 +1,17 @@
+// 通用字段类型
+package app.common;
+
+option java_package = "com.demo2do.entity.protocol.proto.common";
+option java_outer_classname = "CommonPb";
+
+message IdAndName {
+    optional int32 id = 1;
+    optional string name = 2;
+}
+
+message ResponseStatus {
+    // 状态码。 00000表示成功
+    optional string code = 1;
+    // 状态描述
+    optional string description = 2;
+}
