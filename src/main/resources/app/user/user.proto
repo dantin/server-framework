@@ -2,7 +2,7 @@
 // 用户模块
 package app.user;
 
-import "Common.proto";
+import "common.proto";
 
 option java_package = "com.demo2do.entity.protocol.proto.user";
 option java_outer_classname = "UserServicePb";

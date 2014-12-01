@@ -4,7 +4,7 @@ package app;
 option java_package = "com.demo2do.entity.protocol.proto";
 option java_outer_classname = "Demo2doPb";
 
-import "User.proto";
+import "user.proto";
 
 message SampleAppPb {
 
