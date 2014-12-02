@@ -2,13 +2,11 @@ package com.demo2do.core.utils;
 
 import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CommonUtilTest extends TestCase {
+public class CommonUtilsTest extends TestCase {
 
     private List<String> strings;
 
@@ -32,7 +30,7 @@ public class CommonUtilTest extends TestCase {
     }
 
     public void testDeduplicate() {
-        List<String> deduplicatedStrings = CommonUtil.deduplicate(strings);
+        List<String> deduplicatedStrings = CommonUtils.deduplicate(strings);
 
         Assert.assertEquals(strings.size() - 1, deduplicatedStrings.size());
 
@@ -41,7 +39,7 @@ public class CommonUtilTest extends TestCase {
         System.out.println("original list:     " + strings);
         System.out.println("after deduplicate: " + deduplicatedStrings);
 
-        List<Class<?>> deduplicatedClasses = CommonUtil.deduplicate(classes);
+        List<Class<?>> deduplicatedClasses = CommonUtils.deduplicate(classes);
 
         Assert.assertEquals(classes.size() - 1, deduplicatedClasses.size());
 
@@ -52,7 +50,7 @@ public class CommonUtilTest extends TestCase {
     }
 
     public void testDeduplicatedMerge() {
-        List<Integer> mergedIntegerList = CommonUtil.deduplicatedMerge(iList1, iList2);
+        List<Integer> mergedIntegerList = CommonUtils.deduplicatedMerge(iList1, iList2);
 
         Assert.assertEquals(iList1.size() + iList2.size() - 3, mergedIntegerList.size());
 

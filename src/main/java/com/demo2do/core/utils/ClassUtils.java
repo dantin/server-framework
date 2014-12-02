@@ -17,7 +17,7 @@ import java.util.jar.JarFile;
  *
  * @author David
  */
-public abstract class ClassUtil {
+public abstract class ClassUtils {
 
     /**
      * 获取某一包内指定目标类的所有子类，包括其实现类
@@ -81,7 +81,7 @@ public abstract class ClassUtil {
             }
         }
 
-        return CommonUtil.deduplicate(classes);
+        return CommonUtils.deduplicate(classes);
     }
 
     /**

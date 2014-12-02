@@ -1,18 +1,18 @@
 package com.demo2do.core.utils;
 
-import com.demo2do.netty.mediation.Mediator;
+import com.demo2do.netty.mediator.AbstractMediator;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.List;
 
-public class ClassUtilTest extends TestCase{
+public class ClassUtilsTest extends TestCase{
 
     public void testGetAllSubClass() {
         List<Class<?>> classes = null;
         try {
-            classes = ClassUtil.getAllSubClass("com.demo2do", Mediator.class);
+            classes = ClassUtils.getAllSubClass("com.demo2do", AbstractMediator.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -23,7 +23,7 @@ public class ClassUtilTest extends TestCase{
     public void testGetAllClass() {
         List<Class<?>> classes = null;
         try {
-            classes = ClassUtil.getAllClass("com.demo2do.server");
+            classes = ClassUtils.getAllClass("com.demo2do.server");
         } catch (IOException e) {
             e.printStackTrace();
         }

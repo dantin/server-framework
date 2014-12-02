@@ -52,6 +52,15 @@ public abstract class AbstractMediator {
     }
 
     /**
+     *
+     * @param args
+     * @return
+     */
+    public Object execute(Object... args) {
+        return null;
+    }
+
+    /**
      * 获得ProtoBuffer实例，用于ChannelPipeline的Protocol Buffer协议解析链,子类可以重写此方法
      *
      * @return MessageLite, e.g. return SamplePb.getDefaultInstance();

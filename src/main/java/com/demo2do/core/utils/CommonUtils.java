@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * @author David
  */
-public abstract class CommonUtil {
+public abstract class CommonUtils {
 
     /**
      * 去重列表
@@ -45,16 +45,16 @@ public abstract class CommonUtil {
             return null;
         }
         if (one != null && another == null) {
-            return CommonUtil.deduplicate(one);
+            return CommonUtils.deduplicate(one);
         }
         if (one == null) {
-            return CommonUtil.deduplicate(another);
+            return CommonUtils.deduplicate(another);
         }
 
         Set<T> set = new HashSet<T>(another);
         set.removeAll(one);
 
-        List<T> result = new ArrayList<T>(CommonUtil.deduplicate(one));
+        List<T> result = new ArrayList<T>(CommonUtils.deduplicate(one));
         result.addAll(set);
         return result;
     }

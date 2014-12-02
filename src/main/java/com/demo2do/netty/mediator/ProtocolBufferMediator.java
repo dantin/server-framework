@@ -1,7 +1,7 @@
 package com.demo2do.netty.mediator;
 
 import com.demo2do.core.exception.BusinessException;
-import com.demo2do.core.utils.ClassUtil;
+import com.demo2do.core.utils.ClassUtils;
 import com.google.protobuf.MessageLite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public abstract class ProtocolBufferMediator extends AbstractMediator {
         // 判断有没有类继承ProtocolBufferMediator类
         List<Class<?>> classes = null;
         try {
-            classes = ClassUtil.getAllSubClass(basePackage, ProtocolBufferMediator.class);
+            classes = ClassUtils.getAllSubClass(basePackage, ProtocolBufferMediator.class);
 
             if (classes != null && !classes.isEmpty()) {
                 return classes.get(0);
