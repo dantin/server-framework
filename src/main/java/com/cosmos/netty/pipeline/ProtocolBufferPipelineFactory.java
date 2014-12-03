@@ -1,8 +1,7 @@
 package com.cosmos.netty.pipeline;
 
-import com.cosmos.netty.Setting;
+import com.cosmos.server.Setting;
 import com.cosmos.netty.mediator.AbstractMediator;
-import org.apache.commons.lang.StringUtils;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
@@ -18,7 +17,7 @@ import org.jboss.netty.util.Timer;
  *
  * @author David
  */
-public class ServerPipelineFactory implements ChannelPipelineFactory {
+public class ProtocolBufferPipelineFactory implements ChannelPipelineFactory {
 
     private final ExecutionHandler executionHandler;
 
@@ -26,12 +25,12 @@ public class ServerPipelineFactory implements ChannelPipelineFactory {
 
     private final Setting setting;
 
-    public ServerPipelineFactory(final Setting setting, ExecutionHandler executionHandler) {
+    public ProtocolBufferPipelineFactory(final Setting setting, ExecutionHandler executionHandler) {
         this.executionHandler = executionHandler;
         this.setting = setting;
     }
 
-    public ServerPipelineFactory(Setting setting, ExecutionHandler executionHandler, Timer timer) {
+    public ProtocolBufferPipelineFactory(Setting setting, ExecutionHandler executionHandler, Timer timer) {
         this.executionHandler = executionHandler;
         this.timer = timer;
         this.setting = setting;

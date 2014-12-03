@@ -2,7 +2,9 @@ package com.cosmos.netty;
 
 import com.cosmos.core.exception.BusinessException;
 import com.cosmos.netty.mediator.AbstractMediator;
-import com.cosmos.netty.pipeline.ServerPipelineFactory;
+import com.cosmos.netty.pipeline.ProtocolBufferPipelineFactory;
+import com.cosmos.server.Protocol;
+import com.cosmos.server.Setting;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
@@ -24,9 +26,9 @@ import java.util.concurrent.Executors;
 /**
  * Netty服务启动类
  */
-public class NettyServer implements InitializingBean, DisposableBean {
+public class Server implements InitializingBean, DisposableBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(Server.class);
 
     private ChannelFactory channelFactory;
 
@@ -63,7 +65,7 @@ public class NettyServer implements InitializingBean, DisposableBean {
         // 如果心跳开关打开，扫描并设置心跳handler类
         if(setting.isHeartBeatOn()) {
             try {
-                NettyComponentFactory.scanHeartBeatHandlerClass(setting);
+                ComponentFactory.scanHeartBeatHandlerClass(setting);
             } catch (BusinessException e) {
                 logger.error("{} started failure! heart beat handler scanning exception", setting.getServerName());
                 System.exit(1);
@@ -71,7 +73,7 @@ public class NettyServer implements InitializingBean, DisposableBean {
         }
 
         // 扫描并设置业务处理handler类
-        NettyComponentFactory.scanProtocolHandlerClass(setting);
+        ComponentFactory.scanProtocolHandlerClass(setting);
 
         /**
          * 把共享的ExecutionHandler实例放在业务逻辑handler之前即可，注意ExecutionHandler一定要在不同的pipeline之间共享。
@@ -95,7 +97,7 @@ public class NettyServer implements InitializingBean, DisposableBean {
         // 获得业务线程池模型
         MemoryAwareThreadPoolExecutor workThreadPoolexecutor = null;
         try {
-            workThreadPoolexecutor = NettyComponentFactory.getThreadPoolExecutorInstance(setting);
+            workThreadPoolexecutor = ComponentFactory.getThreadPoolExecutorInstance(setting);
             logger.warn("work execution thread pool class: {}, thread pool size: {}", workThreadPoolexecutor.getClass().getName(), setting.getExecutionThreadPoolSize());
         } catch (BusinessException e) {
             logger.error("{} started failure! create thread pool executor exception", setting.getServerName());
@@ -108,9 +110,9 @@ public class NettyServer implements InitializingBean, DisposableBean {
          */
         ExecutionHandler executionHandler = new ExecutionHandler(workThreadPoolexecutor);
 
-        ServerPipelineFactory serverPipelineFactory = NettyComponentFactory.getServerPipelineFactoryInstance(executionHandler, setting);
+        ProtocolBufferPipelineFactory protocolBufferPipelineFactory = ComponentFactory.getServerPipelineFactoryInstance(executionHandler, setting);
 
-        bootstrap.setPipelineFactory(serverPipelineFactory);
+        bootstrap.setPipelineFactory(protocolBufferPipelineFactory);
         /**禁用纳格算法，将数据立即发送出去。纳格算法是以减少封包传送量来增进TCP/IP网络的效能,
          * 前面的child前缀必须要加上，用来指明这个参数将被应用到接收到的Channels，而不是设置的ServerSocketChannel
          */

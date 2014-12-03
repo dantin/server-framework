@@ -15,8 +15,8 @@
 
     <util:properties id="server" location="classpath:/server.properties" />
 
-    <bean id="nettyServer" class="com.cosmos.netty.NettyServer" />
+    <bean id="nettyServer" class="com.cosmos.netty.Server" />
 
-    <bean id="setting" class="com.cosmos.netty.Setting" />
+    <bean id="setting" class="com.cosmos.server.Setting" />
 
 </beans>

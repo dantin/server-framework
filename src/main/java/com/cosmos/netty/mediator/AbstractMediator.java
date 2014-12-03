@@ -1,8 +1,8 @@
 package com.cosmos.netty.mediator;
 
 import com.cosmos.core.exception.BusinessException;
-import com.cosmos.netty.Protocol;
-import com.cosmos.netty.Setting;
+import com.cosmos.server.Protocol;
+import com.cosmos.server.Setting;
 import com.google.protobuf.MessageLite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

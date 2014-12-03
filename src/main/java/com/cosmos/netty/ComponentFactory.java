@@ -3,7 +3,8 @@ package com.cosmos.netty;
 import com.cosmos.core.exception.BusinessException;
 import com.cosmos.core.utils.ClassUtils;
 import com.cosmos.netty.handler.ProtocolHandler;
-import com.cosmos.netty.pipeline.ServerPipelineFactory;
+import com.cosmos.netty.pipeline.ProtocolBufferPipelineFactory;
+import com.cosmos.server.Setting;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.netty.handler.execution.ExecutionHandler;
 import org.jboss.netty.handler.execution.MemoryAwareThreadPoolExecutor;
@@ -21,9 +22,9 @@ import java.util.List;
  *
  * @author David
  */
-public abstract class NettyComponentFactory {
+public abstract class ComponentFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyComponentFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(ComponentFactory.class);
 
     private static final String ORDERED_MEMORY_AWARE_THREAD_POOL_EXECUTOR = "OrderedMemoryAwareThreadPoolExecutor";
 
@@ -65,7 +66,7 @@ public abstract class NettyComponentFactory {
                 if (classes.size() > 1) {
                     logger.warn("found multiple protocol handler, use the first one");
                 }
-                setting.setBusinessHandlerClass((Class<ProtocolHandler>)classes.get(0));
+                setting.setBusinessHandlerClass((Class<ProtocolHandler>) classes.get(0));
             }
         } catch (IOException e) {
             logger.warn("exception when scanning heart beat class, use the default");
@@ -100,11 +101,11 @@ public abstract class NettyComponentFactory {
      * @param setting
      * @return
      */
-    public static ServerPipelineFactory getServerPipelineFactoryInstance(ExecutionHandler executionHandler, final Setting setting) {
+    public static ProtocolBufferPipelineFactory getServerPipelineFactoryInstance(ExecutionHandler executionHandler, final Setting setting) {
         if (setting.isHeartBeatOn()) {
-            return new ServerPipelineFactory(setting, executionHandler, new HashedWheelTimer());
+            return new ProtocolBufferPipelineFactory(setting, executionHandler, new HashedWheelTimer());
         } else {
-            return new ServerPipelineFactory(setting, executionHandler);
+            return new ProtocolBufferPipelineFactory(setting, executionHandler);
         }
     }
 }

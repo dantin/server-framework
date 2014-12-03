@@ -1,6 +1,7 @@
-package com.cosmos.netty;
+package com.cosmos.server;
 
 import com.cosmos.netty.handler.ProtocolHandler;
+import com.cosmos.server.Protocol;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.netty.handler.timeout.IdleStateAwareChannelHandler;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ public class Setting {
 
     private static final List<String> SUPPORTED_PROTOCOLS = Arrays.asList(Protocol.PROTOBUF.getCode());
 
-    public static final String DEFAULT_PACKAGE = "com.demo2do";
+    public static final String DEFAULT_PACKAGE = "com.cosmos";
 
     private static final int MB = 1024 * 1024;
 

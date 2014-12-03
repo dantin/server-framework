@@ -1,4 +1,4 @@
-package com.cosmos.netty;
+package com.cosmos.server;
 
 /**
  * 协议
