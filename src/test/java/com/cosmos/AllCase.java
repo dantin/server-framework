@@ -1,7 +1,7 @@
-package com.demo2do;
+package com.cosmos;
 
-import com.demo2do.core.utils.ClassUtilsTest;
-import com.demo2do.core.utils.CommonUtilsTest;
+import com.cosmos.core.utils.ClassUtilsTest;
+import com.cosmos.core.utils.CommonUtilsTest;
 import junit.extensions.ActiveTestSuite;
 import junit.framework.Test;
 import junit.framework.TestSuite;

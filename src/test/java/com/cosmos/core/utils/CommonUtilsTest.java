@@ -1,4 +1,4 @@
-package com.demo2do.core.utils;
+package com.cosmos.core.utils;
 
 import junit.framework.TestCase;
 import org.junit.Assert;

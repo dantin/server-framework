@@ -1,7 +1,8 @@
-package com.demo2do.netty.mediator;
+package com.cosmos.netty.mediator;
 
-import com.demo2do.core.exception.BusinessException;
-import com.demo2do.netty.Protocol;
+import com.cosmos.core.exception.BusinessException;
+import com.cosmos.netty.Protocol;
+import com.cosmos.netty.Setting;
 import com.google.protobuf.MessageLite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,15 @@ public abstract class AbstractMediator {
     public static Class<?> EXTENDED_MEDIATOR_CLASS = null;
 
     //private static Map<String, MethodBean> methods = new HashMap<String, MethodBean>();
+
+    /**
+     * 根据协议扫描包里适配的中介器
+     *
+     * @return 处理指定协议的指定包里的中介器
+     */
+    public static AbstractMediator getInstance() {
+        return getInstance(Protocol.PROTOBUF, Setting.DEFAULT_PACKAGE);
+    }
 
     /**
      * 根据协议扫描包里适配的中介器

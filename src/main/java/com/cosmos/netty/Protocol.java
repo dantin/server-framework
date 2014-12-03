@@ -1,4 +1,4 @@
-package com.demo2do.netty;
+package com.cosmos.netty;
 
 /**
  * 协议

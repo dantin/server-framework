@@ -1,7 +1,7 @@
-package com.demo2do.app.mediator;
+package com.cosmos.app.mediator;
 
-import com.demo2do.entity.protocol.proto.Demo2doPb.SampleAppPb;
-import com.demo2do.netty.mediator.ProtocolBufferMediator;
+import com.cosmos.netty.mediator.ProtocolBufferMediator;
+import com.cosmos.protocol.EchoProtocol.EchoPb;
 import com.google.protobuf.MessageLite;
 
 /**
@@ -13,13 +13,13 @@ public class EchoMediator extends ProtocolBufferMediator {
 
     @Override
     public String getActionKeyByRequest(Object request) {
-        SampleAppPb protocolModel = (SampleAppPb) request;
-        SampleAppPb.ActionType type = protocolModel.getActionType();
+        EchoPb protocolModel = (EchoPb) request;
+        EchoPb.ActionType type = protocolModel.getActionType();
         return type.name();
     }
 
     @Override
     public MessageLite getPbInstance() {
-        return SampleAppPb.getDefaultInstance();
+        return EchoPb.getDefaultInstance();
     }
 }

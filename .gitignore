@@ -23,7 +23,7 @@ hs_err_pid*
 .classpath
 
 # Protobuffer generated class
-/src/main/java/com/demo2do/entity/protocol/proto/
+/src/main/java/com/cosmos/protocol/
 
 # Gradle stuff
 /.gradle/

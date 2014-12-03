@@ -1,12 +1,12 @@
 
 package app;
 
-option java_package = "com.demo2do.entity.protocol.proto";
-option java_outer_classname = "Demo2doPb";
+option java_package = "com.cosmos.protocol";
+option java_outer_classname = "EchoProtocol";
 
 import "user.proto";
 
-message SampleAppPb {
+message EchoPb {
 
     optional SystemType systemType=1;
     optional InterfaceVersion interfaceVersion=2;

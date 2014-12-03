@@ -1,6 +1,6 @@
-package com.demo2do.core.utils;
+package com.cosmos.core.utils;
 
-import com.demo2do.netty.mediator.AbstractMediator;
+import com.cosmos.netty.mediator.AbstractMediator;
 import junit.framework.TestCase;
 import org.junit.Assert;
 

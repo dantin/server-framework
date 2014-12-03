@@ -1,4 +1,4 @@
-package com.demo2do.core.exception;
+package com.cosmos.core.exception;
 
 /**
  * 业务异常对象

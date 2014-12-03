@@ -1,7 +1,7 @@
 // 通用字段类型
 package app.common;
 
-option java_package = "com.demo2do.entity.protocol.proto.common";
+option java_package = "com.cosmos.protocol.common";
 option java_outer_classname = "CommonPb";
 
 message IdAndName {

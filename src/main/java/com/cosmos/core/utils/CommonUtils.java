@@ -1,4 +1,4 @@
-package com.demo2do.core.utils;
+package com.cosmos.core.utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;

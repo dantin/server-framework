@@ -1,7 +1,7 @@
-package com.demo2do.netty.mediator;
+package com.cosmos.netty.mediator;
 
-import com.demo2do.core.exception.BusinessException;
-import com.demo2do.core.utils.ClassUtils;
+import com.cosmos.core.exception.BusinessException;
+import com.cosmos.core.utils.ClassUtils;
 import com.google.protobuf.MessageLite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

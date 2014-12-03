@@ -1,4 +1,4 @@
-package com.demo2do.server;
+package com.cosmos.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

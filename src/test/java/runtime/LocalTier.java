@@ -1,6 +1,6 @@
 package runtime;
 
-import com.demo2do.server.Bootstrap;
+import com.cosmos.server.Bootstrap;
 
 /**
  * 本地环境启动类
