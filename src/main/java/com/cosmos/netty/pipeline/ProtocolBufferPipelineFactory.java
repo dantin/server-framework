@@ -48,8 +48,7 @@ public class ProtocolBufferPipelineFactory implements ChannelPipelineFactory {
         //心跳开关是否打开
         if (setting.isHeartBeatOn() && timer != null) {
             //心跳包 监听器
-            pipeline.addLast("timeout", new IdleStateHandler(timer, setting.getHeartBeatReaderIdleTime(),
-                    setting.getHeartBeatWriterIdleTime(), setting.getHeartBeatAllIdleTime()));
+            pipeline.addLast("timeout", new IdleStateHandler(timer, setting.getHeartBeatReaderIdleTime(), setting.getHeartBeatWriterIdleTime(), setting.getHeartBeatAllIdleTime()));
             //心跳包
             pipeline.addLast("hearbeat", setting.getHeartBeatClass().newInstance());
         }

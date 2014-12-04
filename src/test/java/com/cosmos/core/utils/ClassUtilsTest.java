@@ -10,9 +10,9 @@ import java.util.List;
 public class ClassUtilsTest extends TestCase{
 
     public void testGetAllSubClass() {
-        List<Class<?>> classes = null;
+        List<Class<? extends AbstractMediator>> classes = null;
         try {
-            classes = ClassUtils.getAllSubClass("com.demo2do", AbstractMediator.class);
+            classes = ClassUtils.getAllSubClass("com.cosmos");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -23,12 +23,12 @@ public class ClassUtilsTest extends TestCase{
     public void testGetAllClass() {
         List<Class<?>> classes = null;
         try {
-            classes = ClassUtils.getAllClass("com.demo2do.server");
+            classes = ClassUtils.getAllClass("com.cosmos.server");
         } catch (IOException e) {
             e.printStackTrace();
         }
         Assert.assertNotNull(classes);
-        Assert.assertEquals(2, classes.size());
+        Assert.assertEquals(4, classes.size());
 
         for(Class<?> clazz : classes) {
             System.out.println(clazz.getName());

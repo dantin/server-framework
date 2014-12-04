@@ -136,6 +136,9 @@ public class Server implements InitializingBean, DisposableBean {
         logger.warn("{} started successfully!", setting.getServerName());
     }
 
+    /**
+     * 停止Netty服务
+     */
     private void stop() {
         logger.warn("{} stopping...", setting.getServerName());
 
