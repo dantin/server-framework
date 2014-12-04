@@ -38,7 +38,7 @@ public abstract class ComponentFactory {
     public static void scanHeartBeatHandlerClass(Setting setting) {
         // 扫描继承IdleStateAwareChannelHandler的心跳类
         try {
-            List<Class<? extends IdleStateAwareChannelHandler>> classes = ClassUtils.getAllSubClass(setting.getBasePackage());
+            List<Class<? extends IdleStateAwareChannelHandler>> classes = ClassUtils.getAllSubClass(setting.getBasePackage(), IdleStateAwareChannelHandler.class);
 
             if (classes.isEmpty()) {
                 throw new BusinessException("heart beat class not found");
@@ -60,7 +60,7 @@ public abstract class ComponentFactory {
     public static void scanProtocolHandlerClass(Setting setting) {
         // 扫描继承IdleStateAwareChannelHandler的心跳类
         try {
-            List<Class<? extends ProtocolHandler>> classes = ClassUtils.getAllSubClass(setting.getBasePackage());
+            List<Class<? extends ProtocolHandler>> classes = ClassUtils.getAllSubClass(setting.getBasePackage(), ProtocolHandler.class);
 
             if (!classes.isEmpty()) {
                 if (classes.size() > 1) {

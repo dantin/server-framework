@@ -24,7 +24,7 @@ public abstract class ProtocolBufferMediator extends AbstractMediator {
         // 判断有没有类继承ProtocolBufferMediator类
         List<Class<? extends ProtocolBufferMediator>> classes = null;
         try {
-            classes = ClassUtils.getAllSubClass(basePackage);
+            classes = ClassUtils.getAllSubClass(basePackage, ProtocolBufferMediator.class);
 
             if (classes != null && !classes.isEmpty()) {
                 return classes.get(0);

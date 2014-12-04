@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -21,41 +23,22 @@ import java.util.jar.JarFile;
 public abstract class ClassUtils {
 
     /**
-     * 获取类中某一方法的返回值类型
-     *
-     * @param clazz          目标类
-     * @param methodName     方法名
-     * @param parameterTypes 方法参数
-     * @return 方法返回值类型
-     */
-    public static Class<?> getMethodReturnType(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
-        try {
-            Method method = clazz.getDeclaredMethod(methodName, parameterTypes);
-            return method.getReturnType();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * 获取某一包内指定目标类的所有子类，包括其实现类
      *
      * @param basePackage 包名
+     * @param type        目标类（父类或接口）
      * @return target的所有子类，包括其实现类
      * @throws java.io.IOException
      */
     @SuppressWarnings({"unchecked"})
-    public static <T> List<Class<? extends T>> getAllSubClass(final String basePackage) throws IOException {
-        Class<?> returnType = ClassUtils.getMethodReturnType(ClassUtils.class, "getAllSubClass", String.class);
-
+    public static <T> List<Class<? extends T>> getAllSubClass(final String basePackage, final Class<T> type) throws IOException {
         List<Class<? extends T>> classes = new ArrayList<Class<? extends T>>();
 
         // 获得包内的所有类名
         for (Class<?> clazz : ClassUtils.getAllClass(basePackage, true)) {
             // 如果clazz是target的子类
-            if (returnType.isAssignableFrom(clazz) && !returnType.equals(clazz)) {
-                classes.add((Class<? extends T>)clazz);
+            if (type.isAssignableFrom(clazz) && !type.equals(clazz)) {
+                classes.add((Class<? extends T>) clazz);
             }
         }
 

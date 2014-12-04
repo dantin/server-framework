@@ -12,12 +12,18 @@ public class ClassUtilsTest extends TestCase{
     public void testGetAllSubClass() {
         List<Class<? extends AbstractMediator>> classes = null;
         try {
-            classes = ClassUtils.getAllSubClass("com.cosmos");
+            classes = ClassUtils.getAllSubClass("com.cosmos", AbstractMediator.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
         Assert.assertNotNull(classes);
-        Assert.assertEquals(0, classes.size());
+        Assert.assertEquals(2, classes.size());
+
+        System.out.println();
+        System.out.println("List sub-class of " + AbstractMediator.class.getName());
+        for(Class<? extends AbstractMediator> clazz : classes) {
+            System.out.println(clazz.getName());
+        }
     }
 
     public void testGetAllClass() {
@@ -30,6 +36,8 @@ public class ClassUtilsTest extends TestCase{
         Assert.assertNotNull(classes);
         Assert.assertEquals(4, classes.size());
 
+        System.out.println();
+        System.out.println("List all classes under com.cosmos.server");
         for(Class<?> clazz : classes) {
             System.out.println(clazz.getName());
         }
