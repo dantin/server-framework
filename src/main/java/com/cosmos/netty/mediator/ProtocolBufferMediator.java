@@ -1,43 +1,23 @@
 package com.cosmos.netty.mediator;
 
 import com.cosmos.core.exception.BusinessException;
-import com.cosmos.core.utils.ClassUtils;
-import com.google.protobuf.MessageLite;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Protocol Buffer中介器
+ *
+ * @author David
  */
-public abstract class ProtocolBufferMediator extends AbstractMediator {
-
-    private static final Logger logger = LoggerFactory.getLogger(ProtocolBufferMediator.class);
+public abstract class ProtocolBufferMediator extends Mediator {
 
     /**
+     * 默认构造函数
      *
-     * @param basePackage
+     * 若使用Protocol Buffer协议，则需要判断自定义的Protocol Buffer协议是否实现
      */
-    public static Class<?> getExtendedMediatorClass(String basePackage) {
-        // 判断有没有类继承ProtocolBufferMediator类
-        List<Class<? extends ProtocolBufferMediator>> classes = null;
-        try {
-            classes = ClassUtils.getAllSubClass(basePackage, ProtocolBufferMediator.class);
-
-            if (classes != null && !classes.isEmpty()) {
-                return classes.get(0);
-            }
-        } catch (IOException e) {
-            logger.error("errors when search sub-class of {}", ProtocolBufferMediator.class.getName());
-            throw new BusinessException("exceptions when scan sub-class", e);
+    public ProtocolBufferMediator() {
+        if (this.getPbInstance() == null) {
+            throw new BusinessException("the method getPbInstance() returns null in protocol buffer mediator");
         }
-        logger.error("no class extends {} under package {}", ProtocolBufferMediator.class.getName(), basePackage);
-        throw new BusinessException("no sub-class found");
     }
 
-    public abstract MessageLite getPbInstance();
-
-    public abstract String getActionKeyByRequest(Object request);
 }

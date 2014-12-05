@@ -1,6 +1,6 @@
 package com.cosmos.netty.handler;
 
-import com.cosmos.netty.mediator.AbstractMediator;
+import com.cosmos.netty.mediator.Mediator;
 import org.jboss.netty.channel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class ProtocolHandler extends SimpleChannelUpstreamHandler {
 
         Object request = e.getMessage();
         if (request != null) {
-            Object response = AbstractMediator.getInstance().execute(request, ip, ctx, e);
+            Object response = Mediator.getInstance().execute(request, ip, ctx, e);
             if (response == null) {
                 logger.error("execute business return object is null, please check business method and return one object.");
             } else {

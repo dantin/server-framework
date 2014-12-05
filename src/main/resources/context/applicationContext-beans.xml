@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- netty component factory -->
+    <bean id="nettyComponentFactory" class="com.cosmos.netty.component.NettyComponentFactory">
+        <property name="protocolComponentScanner">
+            <list>
+                <ref bean="protocolBufferMediatorScanner" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- supported mediators -->
+    <bean id="protocolBufferMediatorScanner" class="com.cosmos.netty.component.scanner.ProtocolBufferMediatorScanner" />
+
+    <!-- heart beat -->
+    <bean id="heartBeatScanner" class="com.cosmos.netty.component.scanner.HeartBeatScanner" />
+
+    <!-- protocol handler -->
+    <bean id="protocolHandlerScanner" class="com.cosmos.netty.component.scanner.ProtocolHandlerScanner" />
+
+</beans>

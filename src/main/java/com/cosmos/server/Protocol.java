@@ -1,7 +1,9 @@
 package com.cosmos.server;
 
 /**
- * 协议
+ * 支持的协议
+ *
+ * @author David
  */
 public enum Protocol {
 

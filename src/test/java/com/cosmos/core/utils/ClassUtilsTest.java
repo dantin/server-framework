@@ -1,6 +1,6 @@
 package com.cosmos.core.utils;
 
-import com.cosmos.netty.mediator.AbstractMediator;
+import com.cosmos.netty.mediator.Mediator;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -10,9 +10,9 @@ import java.util.List;
 public class ClassUtilsTest extends TestCase{
 
     public void testGetAllSubClass() {
-        List<Class<? extends AbstractMediator>> classes = null;
+        List<Class<? extends Mediator>> classes = null;
         try {
-            classes = ClassUtils.getAllSubClass("com.cosmos", AbstractMediator.class);
+            classes = ClassUtils.getAllSubClass("com.cosmos", Mediator.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -20,8 +20,8 @@ public class ClassUtilsTest extends TestCase{
         Assert.assertEquals(2, classes.size());
 
         System.out.println();
-        System.out.println("List sub-class of " + AbstractMediator.class.getName());
-        for(Class<? extends AbstractMediator> clazz : classes) {
+        System.out.println("List sub-class of " + Mediator.class.getName());
+        for(Class<? extends Mediator> clazz : classes) {
             System.out.println(clazz.getName());
         }
     }
