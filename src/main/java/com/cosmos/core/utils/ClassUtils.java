@@ -22,6 +22,12 @@ import java.util.jar.JarFile;
  */
 public abstract class ClassUtils {
 
+    private static final String FILE = "file";
+
+    private static final String JAR = "jar";
+
+    private static final String CLASS_DIRECTORY = "classes/";
+
     /**
      * 获取某一包内指定目标类的所有子类，包括其实现类
      *
@@ -75,9 +81,9 @@ public abstract class ClassUtils {
             URL url = resources.nextElement();
             if (url != null) {
                 String type = url.getProtocol();
-                if ("file".equals(type)) {
+                if (FILE.equals(type)) {
                     scanPackageByFile(classes, basePackage, url.getPath(), recursive);
-                } else if ("jar".equals(type)) {
+                } else if (JAR.equals(type)) {
                     scanPackageByJar(classes, basePackage, url, recursive);
                 }
             } else {
@@ -200,7 +206,7 @@ public abstract class ClassUtils {
             for (URL jarUrl : jarUrls) {
                 String urlPath = jarUrl.getPath();
                 // 不必搜索classes文件夹
-                if (urlPath.endsWith("classes/")) {
+                if (urlPath.endsWith(CLASS_DIRECTORY)) {
                     continue;
                 }
                 scanPackageByJar(classes, packageName, jarUrl, recursive);
