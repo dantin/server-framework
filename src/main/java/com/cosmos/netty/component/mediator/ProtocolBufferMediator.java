@@ -11,7 +11,7 @@ public abstract class ProtocolBufferMediator extends Mediator {
 
     /**
      * 默认构造函数
-     *
+     * <p/>
      * 若使用Protocol Buffer协议，则需要判断自定义的Protocol Buffer协议是否实现
      */
     public ProtocolBufferMediator() {

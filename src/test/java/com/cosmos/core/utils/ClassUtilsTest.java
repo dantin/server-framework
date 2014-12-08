@@ -7,7 +7,7 @@ import org.junit.Assert;
 import java.io.IOException;
 import java.util.List;
 
-public class ClassUtilsTest extends TestCase{
+public class ClassUtilsTest extends TestCase {
 
     public void testGetAllSubClass() {
         List<Class<? extends Mediator>> classes = null;
@@ -21,7 +21,7 @@ public class ClassUtilsTest extends TestCase{
 
         System.out.println();
         System.out.println("List sub-class of " + Mediator.class.getName());
-        for(Class<? extends Mediator> clazz : classes) {
+        for (Class<? extends Mediator> clazz : classes) {
             System.out.println(clazz.getName());
         }
     }
@@ -38,7 +38,7 @@ public class ClassUtilsTest extends TestCase{
 
         System.out.println();
         System.out.println("List all classes under com.cosmos.server");
-        for(Class<?> clazz : classes) {
+        for (Class<?> clazz : classes) {
             System.out.println(clazz.getName());
         }
     }

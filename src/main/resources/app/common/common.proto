@@ -2,6 +2,7 @@
 package app.common;
 
 option java_package = "com.cosmos.protocol.common";
+
 option java_outer_classname = "CommonPb";
 
 message IdAndName {

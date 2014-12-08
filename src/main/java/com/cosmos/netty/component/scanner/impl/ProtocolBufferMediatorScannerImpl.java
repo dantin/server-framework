@@ -44,7 +44,7 @@ public class ProtocolBufferMediatorScannerImpl implements ProtocolScanner<Protoc
             List<Class<? extends ProtocolBufferMediator>> classes = ClassUtils.getAllSubClass(basePackage, ProtocolBufferMediator.class);
 
             if (classes != null && !classes.isEmpty()) {
-                return (Class<ProtocolBufferMediator>)classes.get(0);
+                return (Class<ProtocolBufferMediator>) classes.get(0);
             }
         } catch (IOException e) {
             logger.error("errors when search sub-class of {}", ProtocolBufferMediator.class.getName());

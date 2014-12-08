@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
-    xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- netty server -->
-    <bean id="nettyServer" class="com.cosmos.netty.Server" />
+    <bean id="nettyServer" class="com.cosmos.netty.Server"/>
 
     <!-- netty configuration -->
     <bean id="setting" class="com.cosmos.netty.Setting">
         <property name="protocolComponentScanners">
             <list>
-                <ref bean="protocolBufferMediatorScanner" />
+                <ref bean="protocolBufferMediatorScanner"/>
             </list>
         </property>
     </bean>
 
     <!-- supported mediators -->
-    <bean id="protocolBufferMediatorScanner" class="com.cosmos.netty.component.scanner.impl.ProtocolBufferMediatorScannerImpl" />
+    <bean id="protocolBufferMediatorScanner"
+          class="com.cosmos.netty.component.scanner.impl.ProtocolBufferMediatorScannerImpl"/>
 
     <!-- heart beat -->
-    <bean id="heartBeatScanner" class="com.cosmos.netty.component.scanner.impl.HeartBeatScannerImpl" />
+    <bean id="heartBeatScanner" class="com.cosmos.netty.component.scanner.impl.HeartBeatScannerImpl"/>
 
     <!-- protocol handler -->
-    <bean id="protocolHandlerScanner" class="com.cosmos.netty.component.scanner.impl.ProtocolHandlerScannerImpl" />
+    <bean id="protocolHandlerScanner" class="com.cosmos.netty.component.scanner.impl.ProtocolHandlerScannerImpl"/>
 
 </beans>

@@ -14,7 +14,6 @@ import org.jboss.netty.handler.timeout.IdleStateHandler;
 import org.jboss.netty.util.Timer;
 
 /**
- *
  * @author David
  */
 public class ProtocolBufferPipelineFactory implements ChannelPipelineFactory {
@@ -40,7 +39,7 @@ public class ProtocolBufferPipelineFactory implements ChannelPipelineFactory {
      * 把共享的ExecutionHandler实例放在业务逻辑handler之前即可，注意ExecutionHandler一定要在不同的pipeline之间共享。
      * 它的作用是自动从ExecutionHandler自己管理的一个线程池中拿出一个线程来处理排在它后面的业务逻辑handler。
      * 而worker线程在经过ExecutionHandler后就结束了，它会被ChannelFactory的worker线程池所回收。
-     *
+     * <p/>
      * 它的构造方法是ExecutionHandler(Executor executor)，很显然executor就是ExecutionHandler内部管理的线程池了。
      * Netty额外给我们提供了两种线程池：
      * MemoryAwareThreadPoolExecutor

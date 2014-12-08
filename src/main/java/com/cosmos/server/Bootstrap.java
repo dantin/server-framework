@@ -21,13 +21,13 @@ public final class Bootstrap {
 
     /**
      * 加载整个Server框架的Main函数，完成功能如下：
-     *
+     * <p/>
      * 1. 启动Spring容器
      * 2. 注册shutdown hook
      * 3. 等待Spring容器运行结束后退出
-     *
+     * <p/>
      * 其中，Spring配置路径为：
-     *
+     * <p/>
      * classpath*:/context/applicationContext-*.xml
      *
      * @param args 命令行参数

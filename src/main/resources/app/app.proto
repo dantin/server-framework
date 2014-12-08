@@ -1,17 +1,17 @@
-
 package app;
 
 option java_package = "com.cosmos.protocol";
+
 option java_outer_classname = "EchoProtocol";
 
 import "user.proto";
 
 message EchoPb {
 
-    optional SystemType systemType=1;
-    optional InterfaceVersion interfaceVersion=2;
+    optional SystemType systemType = 1;
+    optional InterfaceVersion interfaceVersion = 2;
 
-    optional ActionType actionType=3; //操作类型
+    optional ActionType actionType = 3; //操作类型
 
     optional string token = 4;
     optional int32 userId = 5;
@@ -29,18 +29,18 @@ message EchoPb {
     optional app.user.UserService userService = 6; // 所有用户服务请求
 
     enum SystemType {
-        ANDROID=1;
-        IOS=2;
+        ANDROID = 1;
+        IOS = 2;
     }
 
-    enum InterfaceVersion{
-        V20=2;
-        V30=3;
+    enum InterfaceVersion {
+        V20 = 2;
+        V30 = 3;
     }
 
     // 操作类型，BussinessType的下一级
-    enum ActionType{
-        LOGIN = 1;//登录
+    enum ActionType {
+        LOGIN = 1; //登录
     }
 
 }

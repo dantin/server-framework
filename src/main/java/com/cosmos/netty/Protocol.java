@@ -7,9 +7,13 @@ package com.cosmos.netty;
  */
 public enum Protocol {
 
-    /** Unsupported Protocol */
+    /**
+     * Unsupported Protocol
+     */
     UNKNOWN("unknown"),
-    /** Google Protocol Buffer */
+    /**
+     * Google Protocol Buffer
+     */
     PROTOBUF("protobuf");
 
     private String code;
