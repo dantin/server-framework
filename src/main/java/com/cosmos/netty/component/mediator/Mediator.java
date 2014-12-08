@@ -170,14 +170,9 @@ public abstract class Mediator {
                 logger.error("action: {}, method: {}, parameter error", methodBean.getAction().getClass().getName(), method.getName());
             }
 
-            String ip = "";
-            if (args.length >= 2) {
-                ip = (String) args[1];
-            }
-
-            logger.warn("execute elapsed time: {} ms, action: {}, class: {}, method: {}, ip: {}",
+            logger.warn("execute elapsed time: {} ms, action: {}, class: {}, method: {}",
                     System.currentTimeMillis() - start, cmd, methodBean.getAction().getClass().getName(),
-                    methodBean.getMethod().getName(), ip);
+                    methodBean.getMethod().getName());
 
             return response;
         } catch (Exception e) {
