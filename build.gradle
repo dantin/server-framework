@@ -46,9 +46,9 @@ publishing {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        url 'http://192.168.9.172:8081/nexus/content/groups/public/'
-    }
+//    maven {
+//        url 'http://192.168.9.172:8081/nexus/content/groups/public/'
+//    }
 }
 
 dependencies {
@@ -88,6 +88,7 @@ dependencies {
 
     // ependency with test scope
     testCompile(
+            'com.google.guava:guava:17.0',
             'org.springframework:spring-test:3.0.5.RELEASE',
             'junit:junit:4.11'
     )
