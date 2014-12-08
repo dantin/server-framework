@@ -153,6 +153,8 @@ public class Setting {
                     return protocolComponent.getComponentClass();
                 }
             }
+        } else {
+            throw new BusinessException("procotol component scanners is null");
         }
 
         throw new BusinessException(protocol.getCode() + " NOT supported!");
@@ -168,15 +170,6 @@ public class Setting {
     }
 
     /**
-     * 获取业务处理实现类
-     *
-     * @return 业务处理实现类
-     */
-    private Class<ProtocolHandler> getProtocolHandlerClass() {
-        return protocolHandlerScanner.getComponentClass();
-    }
-
-    /**
      * 根据配置初始化业务线程池模型
      *
      * @return 业务线程池模型
@@ -185,10 +178,10 @@ public class Setting {
         // 获得业务线程池模型
         MemoryAwareThreadPoolExecutor workThreadPoolexecutor;
 
-        if (StringUtils.isNotBlank(this.getExecutionThreadPoolClass())) {
-            if (StringUtils.equals(ORDERED_MEMORY_AWARE_THREAD_POOL_EXECUTOR, this.getExecutionThreadPoolClass())) {
+        if (StringUtils.isNotBlank(this.executionThreadPoolClass)) {
+            if (StringUtils.equals(ORDERED_MEMORY_AWARE_THREAD_POOL_EXECUTOR, this.executionThreadPoolClass)) {
                 workThreadPoolexecutor = new OrderedMemoryAwareThreadPoolExecutor(this.getExecutionThreadPoolSize(), this.getExecutionThreadPoolMaxChannelMemorySize(), this.getExecutionThreadPoolMaxTotalMemorySize());
-            } else if (StringUtils.equals(MEMORY_AWARE_THREAD_POOL_EXECUTOR, this.getExecutionThreadPoolClass())) {
+            } else if (StringUtils.equals(MEMORY_AWARE_THREAD_POOL_EXECUTOR, this.executionThreadPoolClass)) {
                 workThreadPoolexecutor = new MemoryAwareThreadPoolExecutor(this.getExecutionThreadPoolSize(), this.getExecutionThreadPoolMaxChannelMemorySize(), this.getExecutionThreadPoolMaxTotalMemorySize());
             } else {
                 throw new BusinessException("thread pool executor class is NOT supported");
@@ -230,11 +223,7 @@ public class Setting {
         return StringUtils.equals("on", heartBeatSwitch);
     }
 
-    public String getExecutionThreadPoolClass() {
-        return executionThreadPoolClass;
-    }
-
-    public int getExecutionThreadPoolMaxChannelMemorySize() {
+    private int getExecutionThreadPoolMaxChannelMemorySize() {
         try {
             return Integer.parseInt(executionThreadPoolMaxChannelMemorySize) * MB;
         } catch (RuntimeException e) {
@@ -242,7 +231,7 @@ public class Setting {
         }
     }
 
-    public int getExecutionThreadPoolSize() {
+    private int getExecutionThreadPoolSize() {
         try {
             return Integer.parseInt(executionThreadPoolSize);
         } catch (RuntimeException e) {
@@ -250,7 +239,7 @@ public class Setting {
         }
     }
 
-    public int getExecutionThreadPoolMaxTotalMemorySize() {
+    private int getExecutionThreadPoolMaxTotalMemorySize() {
         try {
             return Integer.parseInt(executionThreadPoolMaxTotalMemorySize) * MB;
         } catch (RuntimeException e) {

@@ -19,7 +19,7 @@ public class EchoMediator extends ProtocolBufferMediator {
     }
 
     @Override
-    public MessageLite getPbInstance() {
+    public MessageLite getProtocolInstance() {
         return EchoPb.getDefaultInstance();
     }
 }

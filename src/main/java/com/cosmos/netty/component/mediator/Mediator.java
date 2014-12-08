@@ -26,6 +26,9 @@ public abstract class Mediator {
      * @return 处理指定协议的指定包里的中介器
      */
     public static synchronized Mediator getInstance() {
+        if(Setting.EXTENDED_MEDIATOR_CLASS == null) {
+            throw new BusinessException("mediator class NOT found");
+        }
         if (INSTANCE == null) {
             try {
                 INSTANCE = Setting.EXTENDED_MEDIATOR_CLASS.newInstance();
@@ -54,11 +57,11 @@ public abstract class Mediator {
     }
 
     /**
-     * 获得ProtoBuffer实例，用于ChannelPipeline的Protocol Buffer协议解析链,子类可以重写此方法
+     * 获得协议实例，用于ChannelPipeline的Protocol Buffer协议解析链,子类可以重写此方法
      *
      * @return MessageLite, e.g. return SamplePb.getDefaultInstance();
      */
-    public abstract MessageLite getPbInstance();
+    public abstract MessageLite getProtocolInstance();
 
     /**
      * 根据请求获取对应的命令，用于action分发，子类可以重写此方法

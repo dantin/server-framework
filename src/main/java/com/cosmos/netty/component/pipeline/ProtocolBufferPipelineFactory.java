@@ -53,7 +53,7 @@ public class ProtocolBufferPipelineFactory implements ChannelPipelineFactory {
     public ChannelPipeline getPipeline() throws Exception {
         ChannelPipeline pipeline = Channels.pipeline();
         pipeline.addLast("frameDecoder", new ProtobufVarint32FrameDecoder());
-        pipeline.addLast("protobufDecoder", new ProtobufDecoder(Mediator.getInstance().getPbInstance()));
+        pipeline.addLast("protobufDecoder", new ProtobufDecoder(Mediator.getInstance().getProtocolInstance()));
 
         pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast("protobufEncoder", new ProtobufEncoder());
