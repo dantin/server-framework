@@ -1,7 +1,7 @@
-package com.cosmos.netty.pipeline;
+package com.cosmos.netty.component.pipeline;
 
-import com.cosmos.server.Setting;
-import com.cosmos.netty.mediator.Mediator;
+import com.cosmos.netty.Setting;
+import com.cosmos.netty.component.mediator.Mediator;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;

@@ -1,8 +1,8 @@
-package com.cosmos.netty.component.scanner;
+package com.cosmos.netty.component.scanner.impl;
 
 import com.cosmos.core.utils.ClassUtils;
-import com.cosmos.netty.component.ComponentScanner;
-import com.cosmos.netty.handler.ProtocolHandler;
+import com.cosmos.netty.component.scanner.ComponentScanner;
+import com.cosmos.netty.component.handler.ProtocolHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +15,9 @@ import java.util.List;
  *
  * @author David
  */
-public class ProtocolHandlerScanner implements ComponentScanner<ProtocolHandler> {
+public class ProtocolHandlerScannerImpl implements ComponentScanner<ProtocolHandler> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProtocolHandlerScanner.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProtocolHandlerScannerImpl.class);
 
     @Value("#{server['base.package']}")
     private String basePackage;

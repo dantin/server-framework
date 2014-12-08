@@ -1,6 +1,7 @@
-package com.cosmos.netty.mediator;
+package com.cosmos.netty.component.mediator;
 
 import com.cosmos.core.exception.BusinessException;
+import com.cosmos.netty.Setting;
 import com.google.protobuf.MessageLite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +17,6 @@ public abstract class Mediator {
 
     private static Mediator INSTANCE = null;
 
-    public static Class<?> EXTENDED_MEDIATOR_CLASS = null;
-
     //private static Map<String, MethodBean> methods = new HashMap<String, MethodBean>();
 
 
@@ -29,7 +28,7 @@ public abstract class Mediator {
     public static synchronized Mediator getInstance() {
         if (INSTANCE == null) {
             try {
-                INSTANCE = (Mediator) EXTENDED_MEDIATOR_CLASS.newInstance();
+                INSTANCE = Setting.EXTENDED_MEDIATOR_CLASS.newInstance();
             } catch (BusinessException e) {
                 logger.error("internal error: {}", e.getMessage());
             } catch (InstantiationException e) {

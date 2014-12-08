@@ -5,8 +5,11 @@
     xsi:schemaLocation="
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- netty component factory -->
-    <bean id="nettyComponentFactory" class="com.cosmos.netty.component.NettyComponentFactory">
+    <!-- netty server -->
+    <bean id="nettyServer" class="com.cosmos.netty.Server" />
+
+    <!-- netty configuration -->
+    <bean id="setting" class="com.cosmos.netty.Setting">
         <property name="protocolComponentScanners">
             <list>
                 <ref bean="protocolBufferMediatorScanner" />
@@ -15,12 +18,12 @@
     </bean>
 
     <!-- supported mediators -->
-    <bean id="protocolBufferMediatorScanner" class="com.cosmos.netty.component.scanner.ProtocolBufferMediatorScanner" />
+    <bean id="protocolBufferMediatorScanner" class="com.cosmos.netty.component.scanner.impl.ProtocolBufferMediatorScannerImpl" />
 
     <!-- heart beat -->
-    <bean id="heartBeatScanner" class="com.cosmos.netty.component.scanner.HeartBeatScanner" />
+    <bean id="heartBeatScanner" class="com.cosmos.netty.component.scanner.impl.HeartBeatScannerImpl" />
 
     <!-- protocol handler -->
-    <bean id="protocolHandlerScanner" class="com.cosmos.netty.component.scanner.ProtocolHandlerScanner" />
+    <bean id="protocolHandlerScanner" class="com.cosmos.netty.component.scanner.impl.ProtocolHandlerScannerImpl" />
 
 </beans>

@@ -1,10 +1,10 @@
-package com.cosmos.netty.component.scanner;
+package com.cosmos.netty.component.scanner.impl;
 
 import com.cosmos.core.exception.BusinessException;
 import com.cosmos.core.utils.ClassUtils;
-import com.cosmos.netty.component.ProtocolScanner;
-import com.cosmos.netty.mediator.ProtocolBufferMediator;
-import com.cosmos.server.Protocol;
+import com.cosmos.netty.component.scanner.ProtocolScanner;
+import com.cosmos.netty.component.mediator.ProtocolBufferMediator;
+import com.cosmos.netty.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author David
  */
-public class ProtocolBufferMediatorScanner implements ProtocolScanner<ProtocolBufferMediator> {
+public class ProtocolBufferMediatorScannerImpl implements ProtocolScanner<ProtocolBufferMediator> {
 
     private static final Logger logger = LoggerFactory.getLogger(ProtocolScanner.class);
 

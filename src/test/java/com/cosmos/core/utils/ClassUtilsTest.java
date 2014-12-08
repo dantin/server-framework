@@ -1,6 +1,6 @@
 package com.cosmos.core.utils;
 
-import com.cosmos.netty.mediator.Mediator;
+import com.cosmos.netty.component.mediator.Mediator;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -34,7 +34,7 @@ public class ClassUtilsTest extends TestCase{
             e.printStackTrace();
         }
         Assert.assertNotNull(classes);
-        Assert.assertEquals(4, classes.size());
+        Assert.assertEquals(2, classes.size());
 
         System.out.println();
         System.out.println("List all classes under com.cosmos.server");

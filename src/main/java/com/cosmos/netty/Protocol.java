@@ -1,4 +1,4 @@
-package com.cosmos.server;
+package com.cosmos.netty;
 
 /**
  * 支持的协议

@@ -7,16 +7,11 @@
     xsi:schemaLocation="
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
-    default-autowire="byName">
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- Enable annotation based container configuration  -->
     <context:annotation-config />
 
     <util:properties id="server" location="classpath:/server.properties" />
-
-    <bean id="nettyServer" class="com.cosmos.netty.Server" />
-
-    <bean id="setting" class="com.cosmos.server.Setting" />
 
 </beans>

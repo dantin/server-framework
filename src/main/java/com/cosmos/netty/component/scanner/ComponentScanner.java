@@ -1,4 +1,4 @@
-package com.cosmos.netty.component;
+package com.cosmos.netty.component.scanner;
 
 /**
  * Netty组件通用接口

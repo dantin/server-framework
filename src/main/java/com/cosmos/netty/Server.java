@@ -1,9 +1,7 @@
 package com.cosmos.netty;
 
 import com.cosmos.core.exception.BusinessException;
-import com.cosmos.netty.component.NettyComponentFactory;
-import com.cosmos.netty.mediator.Mediator;
-import com.cosmos.server.Setting;
+import com.cosmos.netty.component.mediator.Mediator;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
@@ -34,9 +32,6 @@ public class Server implements InitializingBean, DisposableBean {
     @Autowired
     private Setting setting;
 
-    @Autowired
-    private NettyComponentFactory nettyComponentFactory;
-
     /**
      * 启动Netty服务
      */
@@ -45,7 +40,7 @@ public class Server implements InitializingBean, DisposableBean {
 
         try {
             // 根据配置文件扫描各组件实现类
-            nettyComponentFactory.scanComponents();
+            setting.scanComponents();
 
             // 生成中介器
             Mediator.getInstance();
@@ -54,7 +49,7 @@ public class Server implements InitializingBean, DisposableBean {
             this.channelFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool());
             ServerBootstrap bootstrap = new ServerBootstrap(channelFactory);
 
-            bootstrap.setPipelineFactory(nettyComponentFactory.getChannelPipelineFactory());
+            bootstrap.setPipelineFactory(setting.getChannelPipelineFactory());
             /**
              * 禁用纳格算法，将数据立即发送出去。
              * 纳格算法是以减少封包传送量来增进TCP/IP网络的效能，前面的child前缀必须要加上，用来指明

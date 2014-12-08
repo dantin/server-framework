@@ -1,4 +1,4 @@
-package com.cosmos.netty.mediator;
+package com.cosmos.netty.component.mediator;
 
 import com.cosmos.core.exception.BusinessException;
 

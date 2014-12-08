@@ -1,6 +1,6 @@
-package com.cosmos.netty.handler;
+package com.cosmos.netty.component.handler;
 
-import com.cosmos.netty.mediator.Mediator;
+import com.cosmos.netty.component.mediator.Mediator;
 import org.jboss.netty.channel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

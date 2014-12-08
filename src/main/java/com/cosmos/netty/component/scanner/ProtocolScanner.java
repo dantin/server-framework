@@ -1,6 +1,6 @@
-package com.cosmos.netty.component;
+package com.cosmos.netty.component.scanner;
 
-import com.cosmos.server.Protocol;
+import com.cosmos.netty.Protocol;
 
 /**
  * 协议组件
@@ -16,6 +16,5 @@ public interface ProtocolScanner<T> extends ComponentScanner<T> {
      * @return 判断结果
      */
     public boolean isSupported(Protocol protocol);
-
 
 }

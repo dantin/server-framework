@@ -1,6 +1,6 @@
 package com.cosmos.app.mediator;
 
-import com.cosmos.netty.mediator.ProtocolBufferMediator;
+import com.cosmos.netty.component.mediator.ProtocolBufferMediator;
 import com.cosmos.protocol.EchoProtocol.EchoPb;
 import com.google.protobuf.MessageLite;
 
