@@ -44,10 +44,10 @@ public abstract class Mediator {
             if (action != null && StringUtils.isNotBlank(action.name())) {
                 Class<?>[] parameters = method.getParameterTypes();
                 if (parameters.length > METHOD_PARAMETER_TYPES.size() + 1) {
-                    logger.error("register action error, the parameter's length should be less than 4, plealse check the parameter. method name: {}, action name: {}, action class: {}", method.getName(), action.name(), baseAction.getClass().getName());
+                    logger.error("register action error, the parameter's length should be less than 4, please check the parameter. method name: {}, action name: {}, action class: {}", method.getName(), action.name(), baseAction.getClass().getName());
                 } else {
                     if (containsInvalidType(parameters)) {
-                        logger.error("register action error, plealse check the parameter. method name: {}, action name: {}, action class: {}", method.getName(), action.name(), baseAction.getClass().getName());
+                        logger.error("register action error, please check the parameter. method name: {}, action name: {}, action class: {}", method.getName(), action.name(), baseAction.getClass().getName());
                     } else {
                         methods.put(action.name(), new MethodBean(method, baseAction));
                         logger.warn("register action, action name: {}, method name: {}, action class: {}", action.name(), method.getName(), baseAction.getClass().getName());
