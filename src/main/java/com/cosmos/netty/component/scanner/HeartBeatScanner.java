@@ -2,7 +2,7 @@ package com.cosmos.netty.component.scanner;
 
 import com.cosmos.core.exception.BusinessException;
 import com.cosmos.core.utils.ClassUtils;
-import com.cosmos.netty.component.CommonComponent;
+import com.cosmos.netty.component.ComponentScanner;
 import org.jboss.netty.handler.timeout.IdleStateAwareChannelHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author David
  */
-public class HeartBeatScanner implements CommonComponent<IdleStateAwareChannelHandler> {
+public class HeartBeatScanner implements ComponentScanner<IdleStateAwareChannelHandler> {
 
     private static final Logger logger = LoggerFactory.getLogger(HeartBeatScanner.class);
 

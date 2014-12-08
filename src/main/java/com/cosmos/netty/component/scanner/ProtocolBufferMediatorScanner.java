@@ -2,7 +2,7 @@ package com.cosmos.netty.component.scanner;
 
 import com.cosmos.core.exception.BusinessException;
 import com.cosmos.core.utils.ClassUtils;
-import com.cosmos.netty.component.ProtocolComponent;
+import com.cosmos.netty.component.ProtocolScanner;
 import com.cosmos.netty.mediator.ProtocolBufferMediator;
 import com.cosmos.server.Protocol;
 import org.slf4j.Logger;
@@ -17,9 +17,9 @@ import java.util.List;
  *
  * @author David
  */
-public class ProtocolBufferMediatorScanner implements ProtocolComponent<ProtocolBufferMediator> {
+public class ProtocolBufferMediatorScanner implements ProtocolScanner<ProtocolBufferMediator> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProtocolComponent.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProtocolScanner.class);
 
     private static final Protocol PROTOCOL_BUFFER = Protocol.PROTOBUF;
 

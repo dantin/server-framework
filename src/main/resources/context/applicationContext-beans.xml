@@ -7,7 +7,7 @@
 
     <!-- netty component factory -->
     <bean id="nettyComponentFactory" class="com.cosmos.netty.component.NettyComponentFactory">
-        <property name="protocolComponentScanner">
+        <property name="protocolComponentScanners">
             <list>
                 <ref bean="protocolBufferMediatorScanner" />
             </list>

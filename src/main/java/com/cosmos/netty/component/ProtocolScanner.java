@@ -7,7 +7,7 @@ import com.cosmos.server.Protocol;
  *
  * @author David
  */
-public interface ProtocolComponent<T> extends CommonComponent<T> {
+public interface ProtocolScanner<T> extends ComponentScanner<T> {
 
     /**
      * 判断组件是否支持

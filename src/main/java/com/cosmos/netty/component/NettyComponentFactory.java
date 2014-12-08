@@ -2,6 +2,7 @@ package com.cosmos.netty.component;
 
 import com.cosmos.core.exception.BusinessException;
 import com.cosmos.netty.handler.ProtocolHandler;
+import com.cosmos.netty.mediator.Mediator;
 import com.cosmos.netty.pipeline.ProtocolBufferPipelineFactory;
 import com.cosmos.server.Protocol;
 import com.cosmos.server.Setting;
@@ -27,7 +28,7 @@ public class NettyComponentFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyComponentFactory.class);
 
-    private List<ProtocolComponent> protocolComponentScanner;
+    private List<ProtocolScanner> protocolComponentScanners;
 
     private static final String ORDERED_MEMORY_AWARE_THREAD_POOL_EXECUTOR = "OrderedMemoryAwareThreadPoolExecutor";
 
@@ -37,16 +38,32 @@ public class NettyComponentFactory {
     private Setting setting;
 
     @Autowired
-    private CommonComponent<IdleStateAwareChannelHandler> heartBeatScanner;
+    private ComponentScanner<IdleStateAwareChannelHandler> heartBeatScanner;
 
     @Autowired
-    private CommonComponent<ProtocolHandler> protocolHandlerScanner;
+    private ComponentScanner<ProtocolHandler> protocolHandlerScanner;
 
     /**
-     * @param protocolComponentScanner the protocolComponents to set
+     * @param protocolComponentScanners the protocolComponents to set
      */
-    public void setProtocolComponentScanner(List<ProtocolComponent> protocolComponentScanner) {
-        this.protocolComponentScanner = protocolComponentScanner;
+    public void setProtocolComponentScanners(List<ProtocolScanner> protocolComponentScanners) {
+        this.protocolComponentScanners = protocolComponentScanners;
+    }
+
+    /**
+     * 根据配置文件扫描各组件实现类
+     */
+    public void scanComponents() {
+        // 根据协议扫描目标包里的中介器
+        Mediator.EXTENDED_MEDIATOR_CLASS = this.getMediatorClass(setting.getProtocol());
+
+        // 如果心跳开关打开，扫描并设置心跳处理类
+        if (setting.isHeartBeatOn()) {
+            setting.setHeartBeatClass(this.getHeartBeatClass());
+        }
+
+        // 扫描并设置业务处理类
+        setting.setBusinessHandlerClass(this.getProtocolHandlerClass());
     }
 
     /**
@@ -55,9 +72,9 @@ public class NettyComponentFactory {
      * @param protocol 协议
      * @return 相应协议的Mediator实现类
      */
-    public Class<?> getMediatorClass(Protocol protocol) {
-        if(this.protocolComponentScanner != null) {
-            for (ProtocolComponent protocolComponent : this.protocolComponentScanner) {
+    private Class<?> getMediatorClass(Protocol protocol) {
+        if(this.protocolComponentScanners != null) {
+            for (ProtocolScanner protocolComponent : this.protocolComponentScanners) {
                 if (protocolComponent.isSupported(protocol)) {
                     return protocolComponent.getComponentClass();
                 }
@@ -72,7 +89,7 @@ public class NettyComponentFactory {
      *
      * @return 心跳实现类
      */
-    public Class<IdleStateAwareChannelHandler> getHeartBeatClass() {
+    private Class<IdleStateAwareChannelHandler> getHeartBeatClass() {
         return heartBeatScanner.getComponentClass();
     }
 
@@ -81,7 +98,7 @@ public class NettyComponentFactory {
      *
      * @return 业务处理实现类
      */
-    public Class<ProtocolHandler> getProtocolHandlerClass() {
+    private Class<ProtocolHandler> getProtocolHandlerClass() {
         return protocolHandlerScanner.getComponentClass();
     }
 
@@ -106,7 +123,7 @@ public class NettyComponentFactory {
             throw new BusinessException("thread pool executor class is NOT set");
         }
 
-        logger.warn("work execution thread pool class: {}, thread pool size: {}", workThreadPoolexecutor.getClass().getName(), setting.getExecutionThreadPoolSize());
+        logger.warn("work execution thread pool class: {}, thread pool size: {}", workThreadPoolexecutor.getClass().getSimpleName(), setting.getExecutionThreadPoolSize());
 
         /**
          * 为了提高并发数，一般通过ExecutionHandler线程池来异步处理ChannelHandler链（worker线程在经过ExecutionHandler后就结束了，

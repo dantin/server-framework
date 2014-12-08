@@ -1,7 +1,7 @@
 package com.cosmos.netty.component.scanner;
 
 import com.cosmos.core.utils.ClassUtils;
-import com.cosmos.netty.component.CommonComponent;
+import com.cosmos.netty.component.ComponentScanner;
 import com.cosmos.netty.handler.ProtocolHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author David
  */
-public class ProtocolHandlerScanner implements CommonComponent<ProtocolHandler> {
+public class ProtocolHandlerScanner implements ComponentScanner<ProtocolHandler> {
 
     private static final Logger logger = LoggerFactory.getLogger(ProtocolHandlerScanner.class);
 

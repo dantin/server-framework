@@ -30,13 +30,13 @@ public final class Bootstrap {
      *
      * classpath*:/context/applicationContext-*.xml
      *
-     * @param args
+     * @param args 命令行参数
      */
     public static void main(String[] args) {
         long birth = System.currentTimeMillis();
 
         try {
-            logger.warn("Server Framework init...");
+            logger.warn("Bootstrap start to load server...");
             logger.warn("Version: " + VERSION);
 
             // 加载Spring容器
@@ -70,7 +70,7 @@ public final class Bootstrap {
 
             // 启动Spring容器
             context.start();
-            logger.warn("Server Framework started! takes " + (System.currentTimeMillis() - birth) + " ms");
+            logger.warn("Bootstrap takes " + (System.currentTimeMillis() - birth) + " ms");
         } catch (RuntimeException e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);

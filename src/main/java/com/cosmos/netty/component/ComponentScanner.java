@@ -5,7 +5,7 @@ package com.cosmos.netty.component;
  *
  * @author David
  */
-public interface CommonComponent<T> {
+public interface ComponentScanner<T> {
 
     /**
      * 返回组件实现类

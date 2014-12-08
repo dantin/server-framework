@@ -1,22 +1,14 @@
 package com.cosmos.server;
 
 import com.cosmos.netty.handler.ProtocolHandler;
-import com.cosmos.server.Protocol;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.netty.handler.timeout.IdleStateAwareChannelHandler;
 import org.springframework.beans.factory.annotation.Value;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * 配置参数
  */
 public class Setting {
-
-    private static final List<String> SUPPORTED_PROTOCOLS = Arrays.asList(Protocol.PROTOBUF.getCode());
-
-    public static final String DEFAULT_PACKAGE = "com.cosmos";
 
     private static final int MB = 1024 * 1024;
 
@@ -41,12 +33,6 @@ public class Setting {
      */
     @Value("#{server['protocol.type']}")
     private String protocolType;
-
-    /**
-     * 扫描包目录
-     */
-    @Value("#{server['base.package']}")
-    private String basePackage;
 
     /**
      * 心跳开关
@@ -114,19 +100,6 @@ public class Setting {
         this.businessHandlerClass = businessHandlerClass;
     }
 
-    public boolean isSupportedProtocol() {
-        for (String supportedProtocol : SUPPORTED_PROTOCOLS) {
-            if (StringUtils.equals(supportedProtocol, protocolType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public String getSupportedProtocols() {
-        return StringUtils.join(SUPPORTED_PROTOCOLS, " or ");
-    }
-
     public String getServerName() {
         return serverName;
     }
@@ -138,10 +111,6 @@ public class Setting {
             }
         }
         return Protocol.UNKNOWN;
-    }
-
-    public String getBasePackage() {
-        return basePackage;
     }
 
     public boolean isHeartBeatOn() {
