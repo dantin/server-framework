@@ -12,6 +12,9 @@
     <!-- Enable annotation based container configuration  -->
     <context:annotation-config/>
 
+    <!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
+    <context:component-scan base-package="com.cosmos"/>
+
     <util:properties id="server" location="classpath:/server.properties"/>
 
 </beans>

@@ -68,13 +68,15 @@ public abstract class Mediator {
             return true;
         }
 
+        // 业务参数只有一个
+        int businessRequest = 0;
         for (Class<?> parameter : parameters) {
             if (!METHOD_PARAMETER_TYPES.contains(parameter)) {
-                return true;
+                businessRequest++;
             }
         }
 
-        return false;
+        return businessRequest > 1;
     }
 
     /**
