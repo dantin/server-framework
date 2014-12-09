@@ -1,7 +1,7 @@
 #!/bin/sh
 
-PROTO_DIR=../../main/resources/app
-SRC_DIR=../../main/java
+PROTO_DIR=../../test/resources/app
+SRC_DIR=../../test/java
 
 rm -rf $SRC_DIR/com/cosmos/protocol
 mkdir -p $SRC_DIR/com/cosmos/protocol

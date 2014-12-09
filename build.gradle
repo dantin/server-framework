@@ -3,7 +3,7 @@ apply plugin: "idea"
 apply plugin: "eclipse"
 apply plugin: 'maven-publish'
 
-group = "com.demo2do"
+group = "com.cosmos"
 version = '1.0.0.001-SNAPSHOT'
 
 defaultTasks 'clean', 'jar'

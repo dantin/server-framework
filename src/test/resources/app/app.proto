@@ -1,0 +1,49 @@
+package app;
+
+option java_package = "com.cosmos.protocol";
+
+option java_outer_classname = "EchoProtocol";
+
+import "user.proto";
+
+message EchoPb {
+
+    optional SystemType systemType = 1;
+    optional InterfaceVersion interfaceVersion = 2;
+
+    optional ActionType actionType = 3; //操作类型
+
+    optional string token = 4;
+    optional int32 userId = 5;
+
+    // ========================================================
+    // API采用的架构字段，规则如下：
+    // - 对应下面的每个字段，需标注不同的business type
+    // - FangDianTongPb只使用BusinessType字段，以后也会逐渐取消这个字段。
+    // - 所有的请求都会对应到自己的request / response proto
+    // - 不同业务模块的proto放到不同的proto文件
+    // - 不同app之间可能公用的接口则放到shared目录
+    // - 各个response有自己的error code
+    // ========================================================
+
+    optional app.user.UserService userService = 6; // 所有用户服务请求
+
+    enum SystemType {
+        ANDROID = 1;
+        IOS = 2;
+    }
+
+    enum InterfaceVersion {
+        V20 = 2;
+        V30 = 3;
+    }
+
+    // 操作类型，BussinessType的下一级
+    enum ActionType {
+        LOGIN = 1; //登录
+    }
+
+}
+
+
+
