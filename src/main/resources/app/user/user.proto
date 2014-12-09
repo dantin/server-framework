@@ -20,7 +20,8 @@ message LoginRequest {
 }
 
 message LoginResponse {
+    optional app.common.ResponseStatus responseStatus = 1;
     // If login failed, userId will be empty / invalid.
-    optional app.common.IdAndName user = 1;
-    optional string token = 2;
+    optional app.common.IdAndName user = 2;
+    optional string token = 3;
 }
