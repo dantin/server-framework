@@ -12,12 +12,6 @@ task sourceJar(type: Jar) {
     from sourceSets.main.allJava
 }
 
-compileJava {
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
-    options.encoding = 'UTF-8'
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -51,45 +45,4 @@ repositories {
 //    }
 }
 
-dependencies {
 
-    // dependency with compile scope
-    compile(
-            // spring core dependency
-            'org.springframework:spring-core:3.0.5.RELEASE',
-            'org.springframework:spring-beans:3.0.5.RELEASE',
-            'org.springframework:spring-expression:3.0.5.RELEASE',
-            'org.springframework:spring-context:3.0.5.RELEASE',
-            // spring aop dependency
-            'aopalliance:aopalliance:1.0',
-            'org.springframework:spring-aop:3.0.5.RELEASE',
-            'org.springframework:spring-context-support:3.0.5.RELEASE',
-            // spring data access dependency
-            'org.springframework:spring-jdbc:3.0.5.RELEASE',
-            'org.springframework:spring-tx:3.0.5.RELEASE',
-            // commons dependency
-            'commons-lang:commons-lang:2.5',
-            'commons-codec:commons-codec:1.5',
-            // netty
-            'io.netty:netty:3.6.3.Final',
-            // logging dependency
-            // interface
-            'org.slf4j:slf4j-api:1.7.7',
-            // implementations
-            //'ch.qos.logback:logback-access:1.0.13',
-            'ch.qos.logback:logback-classic:1.0.13',
-            'ch.qos.logback:logback-core:1.0.13',
-            // adapters
-            'org.slf4j:log4j-over-slf4j:1.7.7',
-            'org.slf4j:jcl-over-slf4j:1.7.7',
-            // google protobuf
-            'com.google.protobuf:protobuf-java:2.4.1'
-    )
-
-    // ependency with test scope
-    testCompile(
-            'com.google.guava:guava:17.0',
-            'org.springframework:spring-test:3.0.5.RELEASE',
-            'junit:junit:4.11'
-    )
-}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+    <description>Redis相关配置</description>
+
+    <!-- jedis pool config配置 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="20"/>
+        <property name="maxIdle" value="5"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxWaitMillis" value="3000"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+
+    <!-- Sharded Jedis Pool -->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg name="host" value="redis://127.0.0.1:6379/0" />
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- Jedis Data Source -->
+    <bean id="jedisDataSource" class="com.cosmos.data.redis.core.JedisDataSource">
+        <constructor-arg index="0" ref="shardedJedisPool"/>
+    </bean>
+
+    <bean id="jedisTemplate" class="com.cosmos.data.redis.core.JedisTemplate"/>
+
+</beans>
