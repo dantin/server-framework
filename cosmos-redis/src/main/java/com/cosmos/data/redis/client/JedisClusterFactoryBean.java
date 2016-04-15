@@ -14,11 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Jedis Cluster Factory Bean
- * <p>
- * 生成Jedis Cluster的工厂方法
+ * Factory bean of {@link JedisCluster}.
  *
- * 需要Redis版本3.0以上
+ * NOTE: Redis version >= 3.0, no production testing.
  */
 public class JedisClusterFactoryBean implements FactoryBean<JedisCluster>, InitializingBean, DisposableBean {
 

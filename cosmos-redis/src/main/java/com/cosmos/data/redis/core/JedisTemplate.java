@@ -10,6 +10,8 @@ import java.util.Map;
 
 /**
  * Jedis Template which is the core class that interact with redis.
+ *
+ * @author BSD
  */
 public class JedisTemplate {
 

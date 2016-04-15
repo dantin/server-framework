@@ -7,7 +7,9 @@ import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
 /**
- * Jedis Data Source
+ * Jedis Data Source.
+ *
+ * @author BSD
  */
 public class JedisDataSource {
 
