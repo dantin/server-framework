@@ -20,7 +20,9 @@ public class JedisDataSource {
     }
 
     /**
-     * @return Redis客户端对象
+     * Get {@link ShardedJedis} from {@link ShardedJedisPool}.
+     *
+     * @return {@link ShardedJedis} instance
      */
     public ShardedJedis getRedisClient() {
         try {
@@ -31,12 +33,23 @@ public class JedisDataSource {
         }
     }
 
+    /**
+     * Return {@link ShardedJedis} to {@link ShardedJedisPool}.
+     *
+     * @param shardedJedis {@link ShardedJedis} instance
+     */
     public void returnResource(ShardedJedis shardedJedis) {
         if(shardedJedis != null) {
             shardedJedis.close();
         }
     }
 
+    /**
+     * Return {@link ShardedJedis} to {@link ShardedJedisPool} with input parameter.
+     *
+     * @param shardedJedis {@link ShardedJedis} instance
+     * @param broken whether the link is broken
+     */
     public void returnResource(ShardedJedis shardedJedis, boolean broken) {
         if(shardedJedis != null) {
             shardedJedis.close();

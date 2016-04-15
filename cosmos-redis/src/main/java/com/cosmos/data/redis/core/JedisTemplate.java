@@ -9,9 +9,7 @@ import redis.clients.jedis.ShardedJedis;
 import java.util.Map;
 
 /**
- * Jedis Template
- *
- * 与Redis交互的核心类
+ * Jedis Template which is the core class that interact with redis.
  */
 public class JedisTemplate {
 
@@ -21,21 +19,25 @@ public class JedisTemplate {
     private JedisDataSource redisDataSource;
 
     /**
-     * 有返回结果的回调接口定义。
+     * Jedis action that has a return value.
      */
     private interface JedisAction<T> {
         T action(ShardedJedis shardedJedis);
     }
 
     /**
-     * 无返回结果的回调接口定义。
+     * Jedis action that has no return value.
      */
     private interface JedisActionNoResult {
         void action(ShardedJedis shardedJedis);
     }
 
     /**
-     * 执行有返回结果的action。
+     * Execute redis action which has a return value.
+     *
+     * @param jedisAction redis action
+     * @param <T> return type
+     * @return return value
      */
     private <T> T execute(JedisAction<T> jedisAction) {
         ShardedJedis shardedJedis = null;
@@ -53,7 +55,9 @@ public class JedisTemplate {
     }
 
     /**
-     * 执行无返回结果的action。
+     * Execute redis action which has no return value.
+     *
+     * @param jedisAction redis action
      */
     private void execute(JedisActionNoResult jedisAction) {
         ShardedJedis shardedJedis = null;
@@ -71,11 +75,12 @@ public class JedisTemplate {
     }
 
     /**
-     * 设置键值
+     * Set the string value as value of the key. The string can't be longer than 1073741824 bytes (1
+     * GB).
      *
-     * @param key   键
-     * @param value 值
-     * @return 返回状态
+     * @param key key
+     * @param value value
+     * @return Status code reply
      */
     public String set(String key, String value) {
         return execute(shardedJedis -> {
@@ -84,10 +89,11 @@ public class JedisTemplate {
     }
 
     /**
-     * 获取键值
+     * Get the value of the specified key. If the key does not exist null is returned. If the value
+     * stored at key is not a string an error is returned because GET can only handle string values.
      *
-     * @param key 键
-     * @return 值
+     * @param key key
+     * @return Bulk reply
      */
     public String get(String key) {
         return execute(shardedJedis -> {
@@ -96,10 +102,13 @@ public class JedisTemplate {
     }
 
     /**
-     * 自增键值, 若键不存在, 则键值初始化为0
+     * Increment the number stored at key by one. If the key does not exist or contains a value of a
+     * wrong type, set the key to the value of "0" before to perform the increment operation.
      *
-     * @param key 键
-     * @return 自增后的值
+     * INCR commands are limited to 64 bit signed integers.
+     *
+     * @param key key
+     * @return Integer reply, this commands will reply with the new value of key after the increment.
      */
     public Long incr(String key) {
         return execute(shardedJedis -> {
@@ -108,10 +117,11 @@ public class JedisTemplate {
     }
 
     /**
-     * 判断键是否存在
+     * Test if the specified key exists. The command returns "1" if the key exists, otherwise "0" is
+     * returned. Note that even keys set with an empty string as value will return "1".
      *
-     * @param key 键
-     * @return 是否存在
+     * @param key key
+     * @return Boolean reply, true if the key exists, otherwise false
      */
     public Boolean exists(String key) {
         return execute(shardedJedis -> {
@@ -120,10 +130,14 @@ public class JedisTemplate {
     }
 
     /**
-     * 判断键的类型
+     * Return the type of the value stored at key in form of a string. The type can be one of "none",
+     * "string", "list", "set". "none" is returned if the key does not exist.
      *
-     * @param key 键
-     * @return 类型
+     * @param key key
+     * @return Status code reply, specifically: "none" if the key does not exist "string" if the key
+     *         contains a String value "list" if the key contains a List value "set" if the key
+     *         contains a Set value "zset" if the key contains a Sorted Set value "hash" if the key
+     *         contains a Hash value
      */
     public String type(String key) {
         return execute(shardedJedis -> {
@@ -132,11 +146,13 @@ public class JedisTemplate {
     }
 
     /**
-     * 设置键的失效时间
+     * Set a timeout on the specified key. After the timeout the key will be automatically deleted by
+     * the server. A key with an associated timeout is said to be volatile in Redis terminology.
      *
-     * @param key     键
-     * @param seconds 失效时间, 单位: 秒
-     * @return 是否设置成功
+     * @param key key
+     * @param seconds expire timeout
+     * @return Integer reply, specifically: 1: the timeout was set. 0: the timeout was not set since
+     *         the key already has an associated timeout
      */
     public Long expire(String key, int seconds) {
         return execute(shardedJedis -> {
@@ -145,11 +161,15 @@ public class JedisTemplate {
     }
 
     /**
-     * 设置键在某个时间点失效
+     * EXPIREAT works exctly like {@link #expire(String, int) EXPIRE} but instead to get the number of
+     * seconds representing the Time To Live of the key as a second argument (that is a relative way
+     * of specifing the TTL), it takes an absolute one in the form of a UNIX timestamp (Number of
+     * seconds elapsed since 1 Gen 1970).
      *
-     * @param key      键
-     * @param unixTime 失效时间点
-     * @return 是否设置成功
+     * @param key key
+     * @param unixTime expire timestamp
+     * @return Integer reply, specifically: 1: the timeout was set. 0: the timeout was not set since
+     *         the key already has an associated timeout
      */
     public Long expireAt(String key, long unixTime) {
         return execute(shardedJedis -> {
@@ -158,10 +178,13 @@ public class JedisTemplate {
     }
 
     /**
-     * 获取键的失效时间
+     * The TTL command returns the remaining time to live in seconds of a key that has an
+     * {@link #expire(String, int) EXPIRE} set. This introspection capability allows a Redis client to
+     * check how many seconds a given key will continue to be part of the data set.
      *
-     * @param key 键
-     * @return 失效时间
+     * @param key key
+     * @return Integer reply, returns the remaining time to live in seconds of a key that has an
+     *         EXPIRE
      */
     public Long ttl(String key) {
         return execute(shardedJedis -> {
@@ -170,12 +193,12 @@ public class JedisTemplate {
     }
 
     /**
-     * 在键的偏移位设置值
+     * Sets or clears the bit at offset in the string value stored at key.
      *
-     * @param key    键
-     * @param offset 偏移位置
-     * @param value  值, 0/1
-     * @return 该位置的原值
+     * @param key key
+     * @param offset offset
+     * @param value true for set, false for clear
+     * @return
      */
     public Boolean setbit(String key, long offset, boolean value) {
         return execute(shardedJedis -> {
@@ -184,11 +207,11 @@ public class JedisTemplate {
     }
 
     /**
-     * 获取键所在偏移位的值
+     * Returns the bit value at offset in the string value stored at key.
      *
-     * @param key    键
-     * @param offset 偏移位置
-     * @return 偏移位的值
+     * @param key key
+     * @param offset offset
+     * @return true for set, false for unset
      */
     public Boolean getbit(String key, long offset) {
         return execute(shardedJedis -> {
@@ -197,12 +220,12 @@ public class JedisTemplate {
     }
 
     /**
-     * 在键的偏移位设置新值
+     * Set new value at offset in value.
      *
-     * @param key    键
-     * @param offset 偏移位置
-     * @param value  值
-     * @return 修改后值的长度
+     * @param key key
+     * @param offset offset
+     * @param value new value
+     * @return the length of key after change
      */
     public Long setrange(String key, long offset, String value) {
         return execute(shardedJedis -> {
@@ -211,12 +234,12 @@ public class JedisTemplate {
     }
 
     /**
-     * 获取偏移开始位置至结束位置的值
+     * Get partial value from start offset to end offset of the key.
      *
-     * @param key         键
-     * @param startOffset 偏移开始位置
-     * @param endOffset   偏移结束位置
-     * @return 部分值
+     * @param key key
+     * @param startOffset start offset
+     * @param endOffset end offset
+     * @return partial value
      */
     public String getrange(String key, long startOffset, long endOffset) {
         return execute(shardedJedis -> {
@@ -225,12 +248,15 @@ public class JedisTemplate {
     }
 
     /**
-     * 设置哈希键中的某一个域的值
+     * Set the specified hash field to the specified value.
      *
-     * @param key   键
-     * @param field 域
-     * @param value 值
-     * @return 1, 新增 / 0, 更新
+     * If key does not exist, a new key holding a hash is created.
+     *
+     * @param key key
+     * @param field field
+     * @param value value
+     * @return If the field already exists, and the HSET just produced an update of the value, 0 is
+     *         returned, otherwise if a new field is created 1 is returned.
      */
     public Long hset(String key, String field, String value) {
         return execute(shardedJedis -> {
@@ -239,10 +265,10 @@ public class JedisTemplate {
     }
 
     /**
-     * 获取哈希键中的所有域值
+     * Return all the fields and associated values in a hash.
      *
-     * @param key 键
-     * @return 哈希键中的所有域值
+     * @param key key
+     * @return All the fields and values contained into a hash.
      */
     public Map<String, String> hgetall(String key) {
         return execute(shardedJedis -> {

@@ -1,6 +1,10 @@
-# Socket Server Framework
+# Server Framework
 
-A Simple Socket Server Architecture based on Netty, Protocol Buffer, and Spring Framework
+Server Framework used in working
+
+### Components
+
+已知组建包含
 
 ### 1.0.0
 
