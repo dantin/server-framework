@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <description>数据源配置</description>
+
+    <!-- 配置数据源Master -->
+    <bean id="dataSourceMaster" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- Connection Info -->
+        <property name="url" value="${jdbc.master.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="0" />
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="${dbcp.maxActive}"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="0" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${dbcp.maxWait}"/>
+        <property name="defaultAutoCommit" value="false"/>
+        <!-- 是否自动回收超时连接 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 超时时间(以秒数为单位) -->
+        <property name="removeAbandonedTimeout" value="${dbcp.removeAbandonedTimeout}"/>
+        <!-- 在回收事件后，在log中打印出回收Connection的错误信息，包括在哪个地方用了Connection却忘记关闭了，在调试的时候很有用 -->
+        <property name="logAbandoned" value="true"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <!-- 每timeBetweenEvictionRunsMillis毫秒检查一次连接池中空闲的连接,把空闲时间超过minEvictableIdleTimeMillis毫秒的连接
+        断开,直到连接池中的连接数到minIdle为止 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${dbcp.timeBetweenEvictionRunsMillis}"/>
+        <!-- 连接池中连接可空闲的时间(毫秒)，一定要小于mysql的wait_timeout的值 -->
+        <property name="minEvictableIdleTimeMillis" value="${dbcp.minEvictableIdleTimeMillis}"/>
+        <!-- 返回连接时验证其有效性 -->
+        <property name="testOnReturn" value="false"/>
+        <!-- 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除 -->
+        <property name="testWhileIdle" value="true"/>
+        <!-- 取得连接时验证其有效性 -->
+        <property name="testOnBorrow" value="false"/>
+        <!-- 验证SQL -->
+        <property name="validationQuery" value="select 1"/>
+    </bean>
+
+    <!-- 配置数据源Slave -->
+    <bean id="dataSourceSlave" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.slave.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="0" />
+        <property name="maxActive" value="${dbcp.maxActive}"/>
+        <property name="minIdle" value="0" />
+        <property name="maxWait" value="${dbcp.maxWait}"/>
+        <property name="defaultAutoCommit" value="false"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="${dbcp.removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${dbcp.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${dbcp.minEvictableIdleTimeMillis}"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="validationQuery" value="select 1"/>
+    </bean>
+
+    <!-- DataSource -->
+    <bean id="dataSource" class="com.fangdd.axb.server.dao.core.ThreadLocalRoutingDataSource">
+        <property name="defaultTargetDataSource" ref="dataSourceMaster" />
+        <property name="targetDataSources">
+            <map key-type="com.fangdd.axb.server.dao.core.DataSources">
+                <entry key="MASTER" value-ref="dataSourceMaster"/>
+                <entry key="SLAVE" value-ref="dataSourceSlave"/>
+                <!-- 这里还可以加多个dataSource -->
+            </map>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/mapper/Configuration.xml"/>
+        <property name="mapperLocations" value="classpath:/mapper/*Mapper.xml"/>
+    </bean>
+    <!-- Transaction manager for a single JDBC DataSource -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.fangdd.axb.server.dao.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+    <aop:aspectj-autoproxy/>
+
+</beans>

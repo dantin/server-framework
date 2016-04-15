@@ -1,0 +1,16 @@
+group 'com.cosmos'
+version '1.0.0.001-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework:spring-jdbc:${rootProject['spring.version']}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
