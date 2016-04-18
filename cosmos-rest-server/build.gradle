@@ -13,7 +13,7 @@ dependencies {
     compile "io.netty:netty-all:${rootProject['netty.version']}"
     compile "org.javassist:javassist:${rootProject['javassist.version']}"
     compile "com.google.guava:guava:${rootProject['guava.version']}"
-
+    compile "com.google.code.gson:gson:${rootProject['gson.version']}"
 
     // logging dependency
     // interface
@@ -26,5 +26,5 @@ dependencies {
     compile "org.slf4j:log4j-over-slf4j:${rootProject['slf4j.version']}"
     compile "org.slf4j:jcl-over-slf4j:${rootProject['slf4j.version']}"
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "junit:junit:${rootProject['junit.version']}"
 }
