@@ -27,4 +27,5 @@ dependencies {
     compile "org.slf4j:jcl-over-slf4j:${rootProject['slf4j.version']}"
 
     testCompile "junit:junit:${rootProject['junit.version']}"
+    testCompile "org.springframework:spring-context:${rootProject['spring.version']}"
 }
