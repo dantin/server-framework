@@ -32,15 +32,24 @@ public class ControllerMethodDescriptor {
     // target instance
     private Object target;
 
-    public ControllerMethodDescriptor(String uri, ControllerClassDescriptor clazz, Method method) {
-        this(uri, clazz, method, null);
-    }
     /**
      * Construct a {@link ControllerMethodDescriptor} with input parameter.
      *
      * @param uri request uri
      * @param clazz class that contains method
      * @param method method object
+     */
+    public ControllerMethodDescriptor(String uri, ControllerClassDescriptor clazz, Method method) {
+        this(uri, clazz, method, null);
+    }
+
+    /**
+     * Construct a {@link ControllerMethodDescriptor} with input parameter.
+     *
+     * @param uri request uri
+     * @param clazz class that contains method
+     * @param method method object
+     * @param target target bean
      */
     public ControllerMethodDescriptor(String uri, ControllerClassDescriptor clazz, Method method, Object target) {
         this.method = method;

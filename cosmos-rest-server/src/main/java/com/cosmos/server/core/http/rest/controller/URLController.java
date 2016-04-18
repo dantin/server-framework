@@ -33,8 +33,8 @@ public class URLController extends HitCounter {
      * Create new {@link URLController} via input parameters.
      *
      * @param uri uri string
-     * @param providerClass  Controller class
-     * @param procedure Controller method
+     * @param providerClass  controller class
+     * @param procedure controller method
      * @return URLController
      */
     public static URLController fromProvider(String uri, Class<?> providerClass, Method procedure) {
@@ -44,6 +44,15 @@ public class URLController extends HitCounter {
         return handler;
     }
 
+    /**
+     * Create new {@link URLController} via input parameters.
+     *
+     * @param uri uri string
+     * @param providerClass controller class
+     * @param procedure controller method
+     * @param target target bean
+     * @return URLController
+     */
     public static URLController fromProvider(String uri, Class<?> providerClass, Method procedure, Object target) {
         URLController handler = new URLController();
         handler.provider = new ControllerClassDescriptor(providerClass);

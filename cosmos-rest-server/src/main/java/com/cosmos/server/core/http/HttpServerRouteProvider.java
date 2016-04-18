@@ -7,6 +7,7 @@ import com.cosmos.server.commons.constant.http.RequestMethod;
 import com.cosmos.server.commons.exceptions.ControllerRequestMappingException;
 import com.cosmos.server.commons.utils.ClassUtils;
 import com.cosmos.server.commons.utils.PackageScanner;
+import com.cosmos.server.core.context.BeansContext;
 import com.cosmos.server.core.http.rest.ControllerRouter;
 import com.cosmos.server.core.http.rest.URLResource;
 import com.cosmos.server.core.http.rest.controller.DefaultController;
@@ -14,7 +15,6 @@ import com.cosmos.server.core.http.rest.controller.URLController;
 import com.cosmos.server.core.http.rest.interceptor.HttpInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -61,10 +61,11 @@ public abstract class HttpServerRouteProvider extends HttpServerProvider {
      * Scan specified package for http controller and interceptor.  NOT Threads-Safe !!
      *
      * @param packageName package name
+     * @param context     context container
      * @return http server router provider
      * @throws ControllerRequestMappingException
      */
-    public HttpServerRouteProvider scanHttpController(String packageName, ApplicationContext context) throws ControllerRequestMappingException {
+    public HttpServerRouteProvider scanHttpController(String packageName, BeansContext context) throws ControllerRequestMappingException {
         // find all Class
         List<Class<?>> classList = null;
         try {
@@ -130,8 +131,8 @@ public abstract class HttpServerRouteProvider extends HttpServerProvider {
 
                     URLResource urlResource = URLResource.fromHttp(uri, requestMethod);
                     Object bean = context.getBean(clazz);
-                    URLController urlController = null;
-                    if(bean == null) {
+                    URLController urlController;
+                    if (bean == null) {
                         urlController = URLController.fromProvider(uri, clazz, method);
                     } else {
                         urlController = URLController.fromProvider(uri, clazz, method, bean);
