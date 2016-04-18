@@ -3,7 +3,7 @@ version '1.0.0.001-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -12,5 +12,13 @@ repositories {
 dependencies {
     compile "org.springframework:spring-jdbc:${rootProject['spring.version']}"
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "junit:junit:${rootProject['junit.version']}"
+    testCompile "com.alibaba:druid:${rootProject['druid.version']}"
+    testCompile "org.aspectj:aspectjrt:${rootProject['aspectj.version']}"
+    testCompile "org.aspectj:aspectjweaver:${rootProject['aspectj.version']}"
+    testCompile "org.springframework:spring-test:${rootProject['spring-test.version']}"
+
+    testCompile "org.mybatis:mybatis:${rootProject['mybatis.version']}"
+    testCompile "org.mybatis:mybatis-spring:${rootProject['mybatis-spring.version']}"
+
 }

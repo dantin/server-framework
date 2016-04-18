@@ -2,4 +2,5 @@ rootProject.name = 'server-framework'
 include 'cosmos-redis'
 //include 'cosmos-server'
 include 'cosmos-dbproxy'
+include 'cosmos-rest-server'
 

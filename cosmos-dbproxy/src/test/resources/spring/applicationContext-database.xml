@@ -70,10 +70,10 @@
     </bean>
 
     <!-- DataSource -->
-    <bean id="dataSource" class="com.fangdd.axb.server.dao.core.ThreadLocalRoutingDataSource">
+    <bean id="dataSource" class="com.cosmos.data.dbproxy.ThreadLocalRoutingDataSource">
         <property name="defaultTargetDataSource" ref="dataSourceMaster" />
         <property name="targetDataSources">
-            <map key-type="com.fangdd.axb.server.dao.core.DataSources">
+            <map key-type="com.cosmos.data.dbproxy.DataSourceType">
                 <entry key="MASTER" value-ref="dataSourceMaster"/>
                 <entry key="SLAVE" value-ref="dataSourceSlave"/>
                 <!-- 这里还可以加多个dataSource -->

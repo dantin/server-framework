@@ -1,0 +1,30 @@
+group 'com.cosmos'
+version '1.0.1-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "io.netty:netty-all:${rootProject['netty.version']}"
+    compile "org.javassist:javassist:${rootProject['javassist.version']}"
+    compile "com.google.guava:guava:${rootProject['guava.version']}"
+
+
+    // logging dependency
+    // interface
+    compile "org.slf4j:slf4j-api:${rootProject['slf4j.version']}"
+    // implementations
+    //"ch.qos.logback:logback-access:${rootProject['logback.version']}"
+    compile "ch.qos.logback:logback-classic:${rootProject['logback.version']}"
+    compile "ch.qos.logback:logback-core:${rootProject['logback.version']}"
+    // adapters
+    compile "org.slf4j:log4j-over-slf4j:${rootProject['slf4j.version']}"
+    compile "org.slf4j:jcl-over-slf4j:${rootProject['slf4j.version']}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
