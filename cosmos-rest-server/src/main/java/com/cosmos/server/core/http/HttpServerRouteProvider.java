@@ -1,6 +1,6 @@
 package com.cosmos.server.core.http;
 
-import com.cosmos.server.core.rest.interceptor.HttpInterceptor;
+import com.cosmos.server.core.http.rest.interceptor.HttpInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

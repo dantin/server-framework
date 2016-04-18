@@ -1,4 +1,4 @@
-package com.cosmos.server.core.rest.controller;
+package com.cosmos.server.core.http.rest.controller;
 
 import com.cosmos.server.commons.annotations.Header;
 import com.cosmos.server.commons.annotations.PathVariable;
@@ -8,9 +8,9 @@ import com.cosmos.server.commons.exceptions.ControllerParamsNotMatchException;
 import com.cosmos.server.commons.exceptions.ControllerParamsParsedException;
 import com.cosmos.server.commons.exceptions.SerializeException;
 import com.cosmos.server.commons.utils.SerializeUtils;
-import com.cosmos.server.core.rest.HttpContext;
-import com.cosmos.server.core.rest.HttpSession;
-import com.cosmos.server.core.rest.URLResource;
+import com.cosmos.server.core.http.rest.HttpContext;
+import com.cosmos.server.core.http.rest.HttpSession;
+import com.cosmos.server.core.http.rest.URLResource;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

@@ -1,7 +1,7 @@
-package com.cosmos.server.core.rest;
+package com.cosmos.server.core.http.rest;
 
 import com.cosmos.server.commons.constant.http.RequestMethod;
-import com.cosmos.server.core.rest.request.HttpRequestVisitor;
+import com.cosmos.server.core.http.rest.request.HttpRequestVisitor;
 import io.netty.handler.codec.http.HttpVersion;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.cosmos.server.core.rest.controller;
+package com.cosmos.server.core.http.rest.controller;
 
 /**
  * Controller Class Descriptor.

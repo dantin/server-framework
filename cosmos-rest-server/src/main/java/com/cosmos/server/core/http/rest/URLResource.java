@@ -1,4 +1,4 @@
-package com.cosmos.server.core.rest;
+package com.cosmos.server.core.http.rest;
 
 import com.cosmos.server.commons.constant.http.RequestMethod;
 import com.cosmos.server.core.http.utils.HttpUtils;

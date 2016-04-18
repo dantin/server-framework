@@ -1,4 +1,4 @@
-package com.cosmos.server.core.rest;
+package com.cosmos.server.core.http.rest;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

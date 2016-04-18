@@ -1,6 +1,6 @@
-package com.cosmos.server.core.rest.interceptor;
+package com.cosmos.server.core.http.rest.interceptor;
 
-import com.cosmos.server.core.rest.HttpContext;
+import com.cosmos.server.core.http.rest.HttpContext;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 
 /**
