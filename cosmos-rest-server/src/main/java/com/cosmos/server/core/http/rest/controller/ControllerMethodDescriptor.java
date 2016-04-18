@@ -32,6 +32,9 @@ public class ControllerMethodDescriptor {
     // target instance
     private Object target;
 
+    public ControllerMethodDescriptor(String uri, ControllerClassDescriptor clazz, Method method) {
+        this(uri, clazz, method, null);
+    }
     /**
      * Construct a {@link ControllerMethodDescriptor} with input parameter.
      *
@@ -39,7 +42,7 @@ public class ControllerMethodDescriptor {
      * @param clazz class that contains method
      * @param method method object
      */
-    public ControllerMethodDescriptor(String uri, ControllerClassDescriptor clazz, Method method) {
+    public ControllerMethodDescriptor(String uri, ControllerClassDescriptor clazz, Method method, Object target) {
         this.method = method;
 
         // get parameter annotation and types
@@ -90,11 +93,15 @@ public class ControllerMethodDescriptor {
             }
         }
 
-        try {
-            // FIXME integrate with spring framework
-            target = clazz.getClazz().newInstance();
-        } catch (InstantiationException | IllegalAccessException ignored) {
-            ignored.printStackTrace();
+        if(target == null) {
+            try {
+                // FIXME integrate with spring framework
+                this.target = clazz.getClazz().newInstance();
+            } catch (InstantiationException | IllegalAccessException ignored) {
+                ignored.printStackTrace();
+            }
+        } else {
+            this.target = target;
         }
     }
 

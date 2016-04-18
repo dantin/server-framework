@@ -14,6 +14,7 @@ import com.cosmos.server.core.http.rest.controller.URLController;
 import com.cosmos.server.core.http.rest.interceptor.HttpInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -63,7 +64,7 @@ public abstract class HttpServerRouteProvider extends HttpServerProvider {
      * @return http server router provider
      * @throws ControllerRequestMappingException
      */
-    public HttpServerRouteProvider scanHttpController(String packageName) throws ControllerRequestMappingException {
+    public HttpServerRouteProvider scanHttpController(String packageName, ApplicationContext context) throws ControllerRequestMappingException {
         // find all Class
         List<Class<?>> classList = null;
         try {
@@ -128,7 +129,13 @@ public abstract class HttpServerRouteProvider extends HttpServerProvider {
                     RequestMethod requestMethod = requestMapping.method();
 
                     URLResource urlResource = URLResource.fromHttp(uri, requestMethod);
-                    URLController urlController = URLController.fromProvider(uri, clazz, method);
+                    Object bean = context.getBean(clazz);
+                    URLController urlController = null;
+                    if(bean == null) {
+                        urlController = URLController.fromProvider(uri, clazz, method);
+                    } else {
+                        urlController = URLController.fromProvider(uri, clazz, method, bean);
+                    }
 
                     /**
                      * register the controller to controller map {@link ControllerRouter#register(URLResource, URLController)}

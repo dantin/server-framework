@@ -44,6 +44,13 @@ public class URLController extends HitCounter {
         return handler;
     }
 
+    public static URLController fromProvider(String uri, Class<?> providerClass, Method procedure, Object target) {
+        URLController handler = new URLController();
+        handler.provider = new ControllerClassDescriptor(providerClass);
+        handler.procedure = new ControllerMethodDescriptor(uri, handler.provider, procedure, target);
+        return handler;
+    }
+
     /**
      * Set for internal use
      *

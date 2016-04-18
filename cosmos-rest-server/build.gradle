@@ -14,6 +14,7 @@ dependencies {
     compile "org.javassist:javassist:${rootProject['javassist.version']}"
     compile "com.google.guava:guava:${rootProject['guava.version']}"
     compile "com.google.code.gson:gson:${rootProject['gson.version']}"
+    compile "org.springframework:spring-context:${rootProject['spring.version']}"
 
     // logging dependency
     // interface
@@ -27,5 +28,5 @@ dependencies {
     compile "org.slf4j:jcl-over-slf4j:${rootProject['slf4j.version']}"
 
     testCompile "junit:junit:${rootProject['junit.version']}"
-    testCompile "org.springframework:spring-context:${rootProject['spring.version']}"
+    //testCompile "org.springframework:spring-context:${rootProject['spring.version']}"
 }

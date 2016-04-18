@@ -6,6 +6,7 @@ import com.cosmos.server.core.http.HttpServerRouteProvider;
 import com.cosmos.server.core.http.impl.async.AsyncHttpServerProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -16,6 +17,8 @@ public class Bootstrap {
     private static final Logger logger = LoggerFactory.getLogger(Bootstrap.class);
 
     public static final String VERSION = "1.0.0";
+
+    private ApplicationContext context;
 
     public Bootstrap() {
         long birth = System.currentTimeMillis();
@@ -36,6 +39,7 @@ public class Bootstrap {
             });
             context.start();
 
+            this.context = context;
             logger.info("spring context loaded successfully, using {} ms.", (System.currentTimeMillis() - birth));
         } catch (Exception e) {
             logger.error("spring context loaded failed!", e);
@@ -62,7 +66,7 @@ public class Bootstrap {
                 .setHandlerThreads(256));
 
         // scan http controller and interceptor
-        server.scanHttpController("com.cosmos.sample.web.controller");
+        server.scanHttpController("com.cosmos.sample.web.controller", context);
 
         // start http server
         if (!server.start()) {
