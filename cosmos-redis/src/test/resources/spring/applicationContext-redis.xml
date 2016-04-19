@@ -4,7 +4,7 @@
        xsi:schemaLocation="
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <description>Redis相关配置</description>
+    <description>Redis configuration</description>
 
     <!-- jedis pool config配置 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">

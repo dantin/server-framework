@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Redis
+ * Test case for {@link JedisTemplate}.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring/applicationContext-redis.xml"})
@@ -21,7 +21,7 @@ public class JedisTemplateTest {
     private JedisTemplate jedisTemplate;
 
     /**
-     * 批量递增操作
+     * Bulk operation test.
      */
     @Test
     public void testBulkOps() {
